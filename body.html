@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Little Pony’s First Birthday Adventure!</title>
+    <style>
+        @font-face {
+            font-family: "Pony MLP";
+            src: url("font/PONY - MLP 2 - Version Definitiva 6 - Kustren.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: "Equestria Bold";
+            src: url("font/Equestria Bold.otf") format("opentype");
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --text-color: #a96fc3;
+
+            --sky-top: #2a78d0;
+            --sky-mid: #6fb6ee;
+            --sky-bottom: #d6f0fb;
+
+            --grass-back: #6cbb3c;
+            --grass-front: #4a9a2a;
+            --grass-ground: #2f6f1a;
+
+            --parchment: #f4e4bc;
+            --rod-light: #b57a45;
+            --rod-dark: #5a3416;
+            --rod-cap: #e0b34a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* The sky: one continuous gradient stretched over the whole page height,
+           so it stays "just sky" all the way down to the bottom. */
+        body {
+            background: var(--sky-bottom);
+        }
+
+        .page {
+            position: relative;
+            min-height: 300vh; /* Make the page tall so there is room to scroll. Change as needed. */
+            background: linear-gradient(
+                to bottom,
+                var(--sky-top) 0%,
+                var(--sky-mid) 55%,
+                var(--sky-bottom) 100%
+            );
+            overflow: hidden;
+        }
+
+        /* Put your real page content in here */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Title at the top middle of the page */
+        .title {
+            margin: 0;
+            padding: 48px 24px 0;
+            text-align: center;
+            font-weight: normal;
+            color: var(--text-color);
+        }
+
+        .title-line-1 {
+            display: block;
+            font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            line-height: 1.1;
+        }
+
+        .title-line-2 {
+            display: block;
+            margin-top: 0.25em;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.5rem, 4.5vw, 3rem);
+            line-height: 1.15;
+            letter-spacing: 0.02em;
+        }
+
+        /* Intro text under the title (bigger, wide enough to stay on two lines) */
+        .intro {
+            max-width: 64rem;
+            margin: 72px auto 0;
+            padding: 0 24px;
+            text-align: center;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.25rem, 3vw, 2rem);
+            line-height: 1.4;
+            color: var(--text-color);
+            text-wrap: balance;
+        }
+
+        /* Banner image directly under the intro text (no spacing between them) */
+        .banner {
+            display: block;
+            width: min(90%, 720px);
+            height: auto;
+            margin: 0 auto;
+        }
+
+        /* ---------- The scroll (drag the bottom rod down to open it) ---------- */
+        .scroll {
+            position: relative;
+            width: min(88%, 560px);
+            margin: 48px auto 0; /* space between the banner and the scroll */
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .rod {
+            position: relative;
+            height: 30px;
+            border-radius: 15px;
+            background: linear-gradient(to bottom, var(--rod-light), #7a4a24 50%, var(--rod-dark));
+            box-shadow: 0 4px 8px rgba(40, 20, 0, 0.3);
+        }
+
+        /* Golden end caps on both sides of each rod */
+        .rod::before,
+        .rod::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            width: 16px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(to bottom, #f3d27a, var(--rod-cap) 50%, #a87d24);
+        }
+
+        .rod::before { left: -8px; }
+        .rod::after  { right: -8px; }
+
+        /* The bottom rod is the handle you drag */
+        .handle {
+            cursor: grab;
+            touch-action: none;
+            outline: none;
+        }
+
+        .handle:active {
+            cursor: grabbing;
+        }
+
+        .handle:focus-visible {
+            box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px var(--text-color);
+        }
+
+        /* Little down arrow on the handle. It flips up when the scroll is open. */
+        .handle .arrow {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 10px;
+            height: 10px;
+            border-right: 3px solid #f3d27a;
+            border-bottom: 3px solid #f3d27a;
+            transform: translate(-50%, -75%) rotate(45deg);
+            transition: transform 0.3s ease;
+        }
+
+        .scroll.is-open .handle .arrow {
+            transform: translate(-50%, -25%) rotate(225deg);
+        }
+
+        /* The parchment: its height grows as you drag, revealing what is inside */
+        .paper {
+            height: 0;
+            margin: 0 14px;
+            overflow: hidden;
+            background:
+                linear-gradient(to right, rgba(120, 80, 30, 0.28), transparent 7%, transparent 93%, rgba(120, 80, 30, 0.28)),
+                var(--parchment);
+            transition: height 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .paper.dragging {
+            transition: none;
+        }
+
+        .paper-inner {
+            padding: 36px 24px 44px;
+            text-align: center;
+        }
+
+        /* "Event Details" heading inside the scroll */
+        .details-title {
+            margin: 0;
+            font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: normal;
+            line-height: 1.1;
+            color: var(--text-color);
+        }
+
+        /* Date inside the scroll */
+        .event-date {
+            margin: 24px 0 0;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.75rem, 5vw, 3rem);
+            font-weight: normal;
+            line-height: 1.2;
+            color: var(--text-color);
+        }
+
+        /* Make the "28" bigger than the rest of the date */
+        .event-date .day {
+            font-size: 1.9em;
+            line-height: 1;
+        }
+
+        /* Day of the week under the date */
+        .event-day {
+            margin: 8px 0 0;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: normal;
+            line-height: 1.2;
+            color: var(--text-color);
+        }
+
+        /* Holds the Christening and Party rows */
+        .events {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 40px;
+            width: fit-content;
+            max-width: 100%;
+            margin: 48px auto 0; /* the space under "Saturday" */
+        }
+
+        /* Each row: image and text side by side */
+        .christening,
+        .party {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* Party row: image on the right side, text on the left */
+        .party {
+            flex-direction: row-reverse;
+        }
+
+        .christening-icon {
+            flex: 0 0 auto;
+            width: clamp(56px, 11vw, 88px);
+            height: auto;
+        }
+
+        .christening-text {
+            text-align: left;
+        }
+
+        /* "Christening" / "Party" and their time sit side by side with a space between */
+        .christening-line {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            column-gap: 32px;
+        }
+
+        .christening-title,
+        .christening-time {
+            margin: 0;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.25rem, 3.6vw, 2rem);
+            font-weight: normal;
+            line-height: 1.2;
+            color: var(--text-color);
+        }
+
+        /* Venue under the title and time (used by both rows) */
+        .christening-venue {
+            margin: 8px 0 0;
+            font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(0.7rem, 3vw, 1.2rem);
+            font-weight: normal;
+            line-height: 1.25;
+            color: var(--text-color);
+        }
+
+        /* "View Location" button, styled like the scroll rods (wood with golden caps) */
+        .location-btn {
+            position: relative;
+            display: inline-block;
+            margin-top: 16px;
+            padding: 8px 30px;
+            border-radius: 999px;
+            background: linear-gradient(to bottom, var(--rod-light), #7a4a24 50%, var(--rod-dark));
+            box-shadow: 0 4px 8px rgba(40, 20, 0, 0.3);
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1rem, 2.4vw, 1.3rem);
+            line-height: 1.2;
+            color: #f3d27a;
+            text-decoration: none;
+            transition: filter 0.2s ease, transform 0.2s ease;
+        }
+
+        /* Golden end caps, same as the scroll rods */
+        .location-btn::before,
+        .location-btn::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            bottom: -5px;
+            width: 14px;
+            border-radius: 7px;
+            background: linear-gradient(to bottom, #f3d27a, var(--rod-cap) 50%, #a87d24);
+        }
+
+        .location-btn::before { left: -7px; }
+        .location-btn::after  { right: -7px; }
+
+        .location-btn:hover {
+            filter: brightness(1.15);
+            transform: translateY(-1px);
+        }
+
+        .location-btn:active {
+            transform: translateY(1px);
+        }
+
+        .location-btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px var(--text-color);
+        }
+
+        /* The grass: only appears once you reach the bottom of the page. */
+        .grass {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 280px;
+            background:
+                /* front blades (same color as the ground so they blend into it) */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='60' viewBox='0 0 100 60'%3E%3Cpath fill='%234a9a2a' d='M0 60 Q4 32 10 8 Q16 34 22 60Z M20 60 Q26 36 34 16 Q38 40 44 60Z M42 60 Q50 30 56 2 Q62 34 66 60Z M64 60 Q72 36 80 12 Q82 40 88 60Z M86 60 Q92 32 100 6 L100 60Z'/%3E%3C/svg%3E")
+                    repeat-x left 0 bottom 190px / 100px 60px,
+                /* the ground itself */
+                linear-gradient(to bottom, var(--grass-front) 0%, var(--grass-ground) 100%)
+                    no-repeat left bottom / 100% 200px,
+                /* back blades (lighter, taller, peeking out behind) */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='84' viewBox='0 0 140 84'%3E%3Cpath fill='%236cbb3c' d='M0 84 Q6 44 14 10 Q22 46 30 84Z M28 84 Q36 50 48 22 Q54 54 62 84Z M60 84 Q70 40 80 4 Q88 46 96 84Z M94 84 Q104 50 114 18 Q120 52 126 84Z M124 84 Q130 46 140 12 L140 84Z'/%3E%3C/svg%3E")
+                    repeat-x left 35px bottom 190px / 140px 84px;
+        }
+
+        @media (max-width: 600px) {
+            .grass {
+                height: 220px;
+                background-size: 70px 42px, 100% 150px, 100px 60px;
+                background-position: left 0 bottom 140px, left bottom, left 25px bottom 140px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .paper,
+            .handle .arrow,
+            .location-btn {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="content">
+            <h1 class="title">
+                <span class="title-line-1">Our Little Pony’s</span>
+                <span class="title-line-2">First Birthday Adventure!</span>
+            </h1>
+
+            <p class="intro">Join us for a whimsical celebration as we honor the christening and birthday of our little pony</p>
+
+            <img class="banner" src="image/banner.png" alt="Birthday banner">
+
+            <!-- Drag the bottom rod down to open the scroll -->
+            <section class="scroll" id="scroll">
+                <div class="rod"></div>
+
+                <div class="paper" id="paper">
+                    <div class="paper-inner" id="paperInner">
+                        <h2 class="details-title">Event Details</h2>
+                        <p class="event-date">November <span class="day">28</span> 2026</p>
+                        <p class="event-day">Saturday</p>
+
+                        <div class="events">
+                            <div class="christening">
+                                <img class="christening-icon" src="image/house1.png" alt="Church icon">
+
+                                <div class="christening-text">
+                                    <div class="christening-line">
+                                        <p class="christening-title">Christening</p>
+                                        <p class="christening-time">8:00 AM</p>
+                                    </div>
+                                    <p class="christening-venue">Sto Nino de Molino Parish Church</p>
+                                    <a class="location-btn"
+                                       href="https://maps.app.goo.gl/kX8roSxvVZmmEc4s9"
+                                       target="_blank"
+                                       rel="noopener noreferrer">View Location</a>
+                                </div>
+                            </div>
+
+                            <div class="party">
+                                <img class="christening-icon" src="image/house2.png" alt="Party venue icon">
+
+                                <div class="christening-text">
+                                    <div class="christening-line">
+                                        <p class="christening-title">Celebration</p>
+                                        <p class="christening-time">12:00 NN</p>
+                                    </div>
+                                    <p class="christening-venue">McDonald's Buhay na Tubig</p>
+                                    <a class="location-btn"
+                                       href="https://maps.app.goo.gl/1XxNWtvkAEZiDQcUA"
+                                       target="_blank"
+                                       rel="noopener noreferrer">View Location</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rod handle" id="handle"
+                     role="slider" tabindex="0"
+                     aria-label="Drag down to open the scroll"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <span class="arrow"></span>
+                </div>
+            </section>
+        </div>
+
+        <div class="grass" aria-hidden="true"></div>
+    </div>
+
+    <script>
+        (function () {
+            var scroll = document.getElementById("scroll");
+            var paper = document.getElementById("paper");
+            var inner = document.getElementById("paperInner");
+            var handle = document.getElementById("handle");
+
+            var maxHeight = 0;   // how tall the parchment is when fully open
+            var current = 0;     // current parchment height in px
+            var isOpen = false;
+
+            var dragging = false;
+            var moved = false;
+            var startY = 0;
+            var startHeight = 0;
+            var startedOpen = false;
+
+            function clamp(value, min, max) {
+                return Math.min(Math.max(value, min), max);
+            }
+
+            function setHeight(px) {
+                current = clamp(px, 0, maxHeight);
+                paper.style.height = current + "px";
+                var percent = maxHeight ? Math.round((current / maxHeight) * 100) : 0;
+                handle.setAttribute("aria-valuenow", percent);
+            }
+
+            function setOpen(open) {
+                isOpen = open;
+                scroll.classList.toggle("is-open", open);
+                setHeight(open ? maxHeight : 0);
+            }
+
+            function measure() {
+                maxHeight = inner.offsetHeight;
+                if (!dragging) {
+                    setHeight(isOpen ? maxHeight : 0);
+                }
+            }
+
+            handle.addEventListener("pointerdown", function (e) {
+                dragging = true;
+                moved = false;
+                startY = e.clientY;
+                startHeight = current;
+                startedOpen = isOpen;
+                paper.classList.add("dragging");
+                handle.setPointerCapture(e.pointerId);
+            });
+
+            handle.addEventListener("pointermove", function (e) {
+                if (!dragging) return;
+                var dy = e.clientY - startY;
+                if (Math.abs(dy) > 4) moved = true;
+                setHeight(startHeight + dy);
+            });
+
+            function endDrag() {
+                if (!dragging) return;
+                dragging = false;
+                paper.classList.remove("dragging");
+
+                if (!moved) {
+                    // A simple tap or click toggles the scroll
+                    setOpen(!isOpen);
+                } else if (startedOpen) {
+                    setOpen(current > maxHeight * 0.7);
+                } else {
+                    setOpen(current > maxHeight * 0.3);
+                }
+            }
+
+            handle.addEventListener("pointerup", endDrag);
+            handle.addEventListener("pointercancel", endDrag);
+
+            // Keyboard support: Arrow Down opens, Arrow Up closes, Enter/Space toggles
+            handle.addEventListener("keydown", function (e) {
+                if (e.key === "ArrowDown") { e.preventDefault(); setOpen(true); }
+                if (e.key === "ArrowUp")   { e.preventDefault(); setOpen(false); }
+                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpen(!isOpen); }
+            });
+
+            // Re-measure when the content size changes (fonts loading, window resizing)
+            if (window.ResizeObserver) {
+                new ResizeObserver(measure).observe(inner);
+            }
+            window.addEventListener("resize", measure);
+            measure();
+        })();
+    </script>
+</body>
+</html>
