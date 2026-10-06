@@ -15,14 +15,15 @@
 
         @font-face {
             font-family: "Equestria Bold";
-            src: url("font/Equestria Bold.otf") format("opentype");
+            src: url("font/fredoka-one.one-regular.ttf") format("truetype");
             font-weight: normal;
             font-style: normal;
             font-display: swap;
         }
 
         :root {
-            --text-color: #652c89;
+            --text-color: #ffffff;
+            --outline-color: #652c89;
 
             --sky-top: #2a78d0;
             --sky-mid: #6fb6ee;
@@ -36,6 +37,11 @@
             --rod-light: #b57a45;
             --rod-dark: #5a3416;
             --rod-cap: #e0b34a;
+
+            --pinkie-body: #ffb3d9;
+            --pinkie-mane: #ff5fae;
+            --pinkie-deep: #d6338c;
+            --pinkie-light: #ffe3f1;
         }
 
         * {
@@ -56,7 +62,7 @@
 
         .page {
             position: relative;
-            min-height: 300vh; /* Make the page tall so there is room to scroll. Change as needed. */
+            min-height: 420vh; /* Make the page tall so there is room to scroll. Change as needed. */
             background: linear-gradient(
                 to bottom,
                 var(--sky-top) 0%,
@@ -70,6 +76,30 @@
         .content {
             position: relative;
             z-index: 2;
+        }
+
+        /* Small purple outline, applied to every piece of text on the page */
+        .title,
+        .intro,
+        .details-title,
+        .event-date,
+        .event-day,
+        .christening-title,
+        .christening-time,
+        .christening-venue,
+        .location-btn,
+        .countdown-label,
+        .countdown-value,
+        .countdown-unit-label {
+            text-shadow:
+                -2px -2px 0 var(--outline-color),
+                 2px -2px 0 var(--outline-color),
+                -2px  2px 0 var(--outline-color),
+                 2px  2px 0 var(--outline-color),
+                 0    2px 0 var(--outline-color),
+                 0   -2px 0 var(--outline-color),
+                 2px  0   0 var(--outline-color),
+                -2px  0   0 var(--outline-color);
         }
 
         /* Title at the top middle of the page */
@@ -148,21 +178,53 @@
             border-radius: 50%;
         }
 
-        .cloud-1 { top: 90px;  left: -220px; width: 130px; height: 44px; animation: drift-cloud 38s linear infinite; }
+        .cloud-1 { top: 4%;  left: -220px; width: 130px; height: 44px; animation: drift-cloud 38s linear infinite; }
         .cloud-1::before { width: 60px; height: 60px; top: -28px; left: 15px; }
         .cloud-1::after  { width: 46px; height: 46px; top: -20px; left: 65px; }
 
-        .cloud-2 { top: 220px; left: -260px; width: 170px; height: 54px; animation: drift-cloud 52s linear infinite; animation-delay: -18s; }
+        .cloud-2 { top: 12%; left: -260px; width: 170px; height: 54px; animation: drift-cloud 52s linear infinite; animation-delay: -18s; }
         .cloud-2::before { width: 74px; height: 74px; top: -34px; left: 20px; }
         .cloud-2::after  { width: 56px; height: 56px; top: -24px; left: 90px; }
 
-        .cloud-3 { top: 40px;  left: -180px; width: 110px; height: 38px; animation: drift-cloud 30s linear infinite; animation-delay: -8s; }
+        .cloud-3 { top: 2%;  left: -180px; width: 110px; height: 38px; animation: drift-cloud 30s linear infinite; animation-delay: -8s; }
         .cloud-3::before { width: 50px; height: 50px; top: -24px; left: 12px; }
         .cloud-3::after  { width: 38px; height: 38px; top: -16px; left: 55px; }
 
-        .cloud-4 { top: 330px; left: -240px; width: 150px; height: 48px; animation: drift-cloud 46s linear infinite; animation-delay: -30s; }
+        .cloud-4 { top: 18%; left: -240px; width: 150px; height: 48px; animation: drift-cloud 46s linear infinite; animation-delay: -30s; }
         .cloud-4::before { width: 64px; height: 64px; top: -30px; left: 18px; }
         .cloud-4::after  { width: 48px; height: 48px; top: -20px; left: 78px; }
+
+        .cloud-5 { top: 28%; left: -200px; width: 140px; height: 46px; animation: drift-cloud 42s linear infinite; animation-delay: -12s; }
+        .cloud-5::before { width: 62px; height: 62px; top: -30px; left: 16px; }
+        .cloud-5::after  { width: 48px; height: 48px; top: -20px; left: 68px; }
+
+        .cloud-6 { top: 38%; left: -250px; width: 160px; height: 50px; animation: drift-cloud 50s linear infinite; animation-delay: -26s; }
+        .cloud-6::before { width: 70px; height: 70px; top: -32px; left: 18px; }
+        .cloud-6::after  { width: 52px; height: 52px; top: -22px; left: 82px; }
+
+        .cloud-7 { top: 47%; left: -190px; width: 120px; height: 40px; animation: drift-cloud 34s linear infinite; animation-delay: -4s; }
+        .cloud-7::before { width: 54px; height: 54px; top: -26px; left: 14px; }
+        .cloud-7::after  { width: 42px; height: 42px; top: -18px; left: 60px; }
+
+        .cloud-8 { top: 57%; left: -230px; width: 150px; height: 48px; animation: drift-cloud 44s linear infinite; animation-delay: -34s; }
+        .cloud-8::before { width: 64px; height: 64px; top: -30px; left: 18px; }
+        .cloud-8::after  { width: 48px; height: 48px; top: -20px; left: 78px; }
+
+        .cloud-9 { top: 67%; left: -210px; width: 135px; height: 44px; animation: drift-cloud 40s linear infinite; animation-delay: -16s; }
+        .cloud-9::before { width: 60px; height: 60px; top: -28px; left: 16px; }
+        .cloud-9::after  { width: 46px; height: 46px; top: -18px; left: 66px; }
+
+        .cloud-10 { top: 76%; left: -260px; width: 170px; height: 54px; animation: drift-cloud 54s linear infinite; animation-delay: -40s; }
+        .cloud-10::before { width: 74px; height: 74px; top: -34px; left: 20px; }
+        .cloud-10::after  { width: 56px; height: 56px; top: -24px; left: 90px; }
+
+        .cloud-11 { top: 86%; left: -180px; width: 115px; height: 38px; animation: drift-cloud 32s linear infinite; animation-delay: -10s; }
+        .cloud-11::before { width: 52px; height: 52px; top: -26px; left: 14px; }
+        .cloud-11::after  { width: 40px; height: 40px; top: -18px; left: 58px; }
+
+        .cloud-12 { top: 93%; left: -240px; width: 150px; height: 48px; animation: drift-cloud 46s linear infinite; animation-delay: -22s; }
+        .cloud-12::before { width: 64px; height: 64px; top: -30px; left: 18px; }
+        .cloud-12::after  { width: 48px; height: 48px; top: -20px; left: 78px; }
 
         @keyframes drift-cloud {
             from { transform: translateX(0); }
@@ -298,7 +360,7 @@
             text-align: center;
         }
 
-        /* "What's Happening in Ponyville" heading inside the scroll */
+        /* "Event Details" heading inside the scroll */
         .details-title {
             margin: 0;
             font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
@@ -312,7 +374,7 @@
         .event-date {
             margin: 24px 0 0;
             font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-            font-size: clamp(1.75rem, 5vw, 3rem);
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
             font-weight: normal;
             line-height: 1.2;
             color: var(--text-color);
@@ -353,9 +415,8 @@
             gap: 16px;
         }
 
-        /* Party row: image on the right side, text on the left */
+        /* Party row: image on the left side, same layout as Christening */
         .party {
-            flex-direction: row-reverse;
         }
 
         .christening-icon {
@@ -409,7 +470,7 @@
             font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
             font-size: clamp(1rem, 2.4vw, 1.3rem);
             line-height: 1.2;
-            color: #f3d27a;
+            color: var(--text-color);
             text-decoration: none;
             transition: filter 0.2s ease, transform 0.2s ease;
         }
@@ -495,7 +556,7 @@
             font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
             font-size: clamp(1.5rem, 4.2vw, 2.2rem);
             line-height: 1.1;
-            color: #f3d27a;
+            color: var(--text-color);
         }
 
         .countdown-unit-label {
@@ -503,7 +564,7 @@
             margin-top: 4px;
             font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
             font-size: clamp(0.75rem, 2vw, 0.95rem);
-            color: #f3d27a;
+            color: var(--text-color);
         }
 
         @media (max-width: 420px) {
@@ -515,6 +576,124 @@
                 min-width: 64px;
                 padding: 10px 6px;
             }
+        }
+
+        /* ---------- Godparents, in a Pinkie Pie pink party theme ---------- */
+        .godparents {
+            position: relative;
+            width: min(88%, 620px);
+            margin: 56px auto 0;
+            padding: 36px 24px 32px;
+            border-radius: 24px;
+            background: linear-gradient(to bottom, var(--pinkie-light), var(--pinkie-body));
+            box-shadow: 0 6px 16px rgba(214, 51, 140, 0.35);
+        }
+
+        /* Bright pink dashed border, like a party invitation */
+        .godparents::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            border: 4px dashed var(--pinkie-mane);
+            pointer-events: none;
+        }
+
+        .godparents-title {
+            margin: 0 0 28px;
+            text-align: center;
+            font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.75rem);
+            font-weight: normal;
+            line-height: 1.1;
+            color: #ffffff;
+            text-shadow:
+                -2px -2px 0 var(--pinkie-deep),
+                 2px -2px 0 var(--pinkie-deep),
+                -2px  2px 0 var(--pinkie-deep),
+                 2px  2px 0 var(--pinkie-deep),
+                 0    2px 0 var(--pinkie-deep),
+                 0   -2px 0 var(--pinkie-deep),
+                 2px  0   0 var(--pinkie-deep),
+                -2px  0   0 var(--pinkie-deep);
+        }
+
+        .godparents-columns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px 48px;
+        }
+
+        .godparents-column {
+            flex: 1 1 200px;
+            max-width: 260px;
+            text-align: center;
+        }
+
+        /* The Godfather column holds two sub-lists side by side, so it needs more room */
+        .godparents-column--wide {
+            flex-basis: 320px;
+            max-width: 360px;
+        }
+
+        .godparents-column-title {
+            margin: 0 0 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed var(--pinkie-mane);
+            font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.2rem, 3.2vw, 1.6rem);
+            font-weight: normal;
+            line-height: 1.1;
+            color: #ffffff;
+            text-shadow:
+                -2px -2px 0 var(--pinkie-deep),
+                 2px -2px 0 var(--pinkie-deep),
+                -2px  2px 0 var(--pinkie-deep),
+                 2px  2px 0 var(--pinkie-deep),
+                 0    2px 0 var(--pinkie-deep),
+                 0   -2px 0 var(--pinkie-deep),
+                 2px  0   0 var(--pinkie-deep),
+                -2px  0   0 var(--pinkie-deep);
+        }
+
+        /* Splits a long name list (like Godfather) into two side-by-side sub-lists */
+        .godparents-subcolumns {
+            display: flex;
+            justify-content: center;
+            gap: 10px 24px;
+        }
+
+        .godparents-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .godparents-list li {
+            margin: 0;
+            padding: 5px 0;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(0.95rem, 2.4vw, 1.1rem);
+            line-height: 1.4;
+            color: #ffffff;
+            text-shadow:
+                -1.5px -1.5px 0 var(--pinkie-deep),
+                 1.5px -1.5px 0 var(--pinkie-deep),
+                -1.5px  1.5px 0 var(--pinkie-deep),
+                 1.5px  1.5px 0 var(--pinkie-deep),
+                 0      1.5px 0 var(--pinkie-deep),
+                 0     -1.5px 0 var(--pinkie-deep),
+                 1.5px  0     0 var(--pinkie-deep),
+                -1.5px  0     0 var(--pinkie-deep);
+        }
+
+        /* Dress image, outside and below the scroll */
+        .dress {
+            display: block;
+            width: min(70%, 420px);
+            height: auto;
+            margin: 48px auto 0;
         }
 
         /* The grass: only appears once you reach the bottom of the page. */
@@ -561,6 +740,14 @@
             <div class="cloud cloud-2"></div>
             <div class="cloud cloud-3"></div>
             <div class="cloud cloud-4"></div>
+            <div class="cloud cloud-5"></div>
+            <div class="cloud cloud-6"></div>
+            <div class="cloud cloud-7"></div>
+            <div class="cloud cloud-8"></div>
+            <div class="cloud cloud-9"></div>
+            <div class="cloud cloud-10"></div>
+            <div class="cloud cloud-11"></div>
+            <div class="cloud cloud-12"></div>
 
             <div class="star star-1"></div>
             <div class="star star-2"></div>
@@ -664,6 +851,51 @@
                     <span class="arrow"></span>
                 </div>
             </section>
+
+            <!-- Godparents -->
+            <section class="godparents">
+                <h2 class="godparents-title">Our Godparents</h2>
+
+                <div class="godparents-columns">
+                    <div class="godparents-column godparents-column--wide">
+                        <h3 class="godparents-column-title">Godfather</h3>
+                        <div class="godparents-subcolumns">
+                            <ul class="godparents-list">
+                                <li>Joshua Cruz</li>
+                                <li>Noriel Rivera</li>
+                                <li>Jesmar Regencia</li>
+                                <li>Cj Judilla</li>
+                                <li>Renniel Saing</li>
+                                <li>Kael Sevilla</li>
+                                <li>Pablo</li>
+                                <li>Nicole Vivas</li>
+                            </ul>
+                            <ul class="godparents-list">
+                                <li>RJ Givera</li>
+                                <li>Dj Carta</li>
+                                <li>Jr Saracho</li>
+                                <li>Aron Razote</li>
+                                <li>Alvin Mantilla</li>
+                                <li>Lenon Bert Callao</li>
+                                <li>Kid Yambao</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="godparents-column">
+                        <h3 class="godparents-column-title">Godmother</h3>
+                        <ul class="godparents-list">
+                            <li>Marian Galgana</li>
+                            <li>Tine Dorado</li>
+                            <li>Catrine Cruz</li>
+                            <li>Mahlia Palma</li>
+                            <li>Jana Hernandez</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <img class="dress" src="image/dress.jpg" alt="Birthday dress">
         </div>
 
         <div class="grass" aria-hidden="true"></div>
