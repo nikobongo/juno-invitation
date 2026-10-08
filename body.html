@@ -1,1405 +1,1167 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Little Pony’s First Birthday Adventure!</title>
     <style>
-      @font-face {
-        font-family: "Pony MLP";
-        src: url("font/PONY - MLP 2 - Version Definitiva 6 - Kustren.ttf")
-          format("truetype");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
+        @font-face {
+            font-family: "Pony MLP";
+            src: url("font/PONY - MLP 2 - Version Definitiva 6 - Kustren.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
 
-      @font-face {
-        font-family: "Equestria Bold";
-        src: url("font/fredoka-one.one-regular.ttf") format("truetype");
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
+        @font-face {
+            font-family: "Equestria Bold";
+            src: url("font/fredoka-one.one-regular.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
 
-      :root {
-        --text-color: #ffffff;
-        --outline-color: #652c89;
+        @font-face {
+            font-family: "Equestria Bold Original";
+            src: url("font/Equestria Bold.otf") format("opentype");
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
 
-        --sky-top: #2a78d0;
-        --sky-mid: #6fb6ee;
-        --sky-bottom: #d6f0fb;
+        :root {
+            --text-color: #ffffff;
+            --outline-color: #652c89;
 
-        --grass-back: #6cbb3c;
-        --grass-front: #4a9a2a;
-        --grass-ground: #2f6f1a;
+            --sky-top: #2a78d0;
+            --sky-mid: #6fb6ee;
+            --sky-bottom: #d6f0fb;
 
-        --parchment: #f4e4bc;
-        --rod-light: #b57a45;
-        --rod-dark: #5a3416;
-        --rod-cap: #e0b34a;
+            --grass-back: #6cbb3c;
+            --grass-front: #4a9a2a;
+            --grass-ground: #2f6f1a;
 
-        --pinkie-body: #ffb3d9;
-        --pinkie-mane: #ff5fae;
-        --pinkie-deep: #d6338c;
-        --pinkie-light: #ffe3f1;
-      }
+            --parchment: #f4e4bc;
+            --rod-light: #b57a45;
+            --rod-dark: #5a3416;
+            --rod-cap: #e0b34a;
 
-      * {
-        box-sizing: border-box;
-      }
+            --pinkie-body: #ffb3d9;
+            --pinkie-mane: #ff5fae;
+            --pinkie-deep: #d6338c;
+            --pinkie-light: #ffe3f1;
+        }
 
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-      }
+        * {
+            box-sizing: border-box;
+        }
 
-      /* The sky: one continuous gradient stretched over the whole page height,
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* The sky: one continuous gradient stretched over the whole page height,
            so it stays "just sky" all the way down to the bottom. */
-      body {
-        background: var(--sky-bottom);
-      }
+        body {
+            background: var(--sky-bottom);
+        }
 
-      .page {
-        position: relative;
-        min-height: 420vh; /* Make the page tall so there is room to scroll. Change as needed. */
-        background: linear-gradient(
-          to bottom,
-          var(--sky-top) 0%,
-          var(--sky-mid) 55%,
-          var(--sky-bottom) 100%
-        );
-        overflow: hidden;
-      }
+        .page {
+            position: relative;
+            min-height: 420vh; /* Make the page tall so there is room to scroll. Change as needed. */
+            background: linear-gradient(
+                to bottom,
+                var(--sky-top) 0%,
+                var(--sky-mid) 55%,
+                var(--sky-bottom) 100%
+            );
+            overflow: hidden;
+        }
 
-      /* Put your real page content in here */
-      .content {
-        position: relative;
-        z-index: 2;
-      }
+        /* Put your real page content in here */
+        .content {
+            position: relative;
+            z-index: 2;
+        }
 
-      /* Small purple outline, applied to every piece of text on the page */
-      .title,
-      .intro,
-      .details-title,
-      .event-date,
-      .event-day,
-      .christening-title,
-      .christening-time,
-      .christening-venue,
-      .location-btn,
-      .countdown-label,
-      .countdown-value,
-      .countdown-unit-label {
-        text-shadow:
-          -2px -2px 0 var(--outline-color),
-          2px -2px 0 var(--outline-color),
-          -2px 2px 0 var(--outline-color),
-          2px 2px 0 var(--outline-color),
-          0 2px 0 var(--outline-color),
-          0 -2px 0 var(--outline-color),
-          2px 0 0 var(--outline-color),
-          -2px 0 0 var(--outline-color);
-      }
+        /* Small purple outline, applied to every piece of text on the page */
+        .title,
+        .intro,
+        .details-title,
+        .event-date,
+        .event-day,
+        .christening-title,
+        .christening-time,
+        .christening-venue,
+        .location-btn,
+        .countdown-label,
+        .countdown-value,
+        .countdown-unit-label {
+            text-shadow:
+                -2px -2px 0 var(--outline-color),
+                 2px -2px 0 var(--outline-color),
+                -2px  2px 0 var(--outline-color),
+                 2px  2px 0 var(--outline-color),
+                 0    2px 0 var(--outline-color),
+                 0   -2px 0 var(--outline-color),
+                 2px  0   0 var(--outline-color),
+                -2px  0   0 var(--outline-color);
+        }
 
-      /* Title at the top middle of the page */
-      .title {
-        margin: 0;
-        padding: 48px 24px 0;
-        text-align: center;
-        font-weight: normal;
-        color: var(--text-color);
-      }
+        /* Title at the top middle of the page */
+        .title {
+            margin: 0;
+            padding: 48px 24px 0;
+            text-align: center;
+            font-weight: normal;
+            color: var(--text-color);
+        }
 
-      .title-line-1 {
-        display: block;
-        font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(2.5rem, 8vw, 5.5rem);
-        line-height: 1.1;
-        color: #e93a95; /* new */
-      }
+.title-line-1 {
+    display: block;
+    font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+    font-size: clamp(1.3rem, 9vw, 5.5rem);  /* was clamp(1.3rem, 11vw, 5.5rem) */
+    line-height: 1.1;
+    color: #e93a95;
+    outline: #e93a95;
+}
 
-      .title-line-2 {
-        display: block;
-        margin-top: 0.25em;
-        font-family:
-          "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(1.5rem, 4.5vw, 3rem);
-        line-height: 1.15;
-        letter-spacing: 0.02em;
-      }
+        .title-line-2 {
+            display: block;
+            margin-top: 0.25em;
+            font-family: "Equestria Bold Original", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.5rem, 4.5vw, 3rem);
+            line-height: 1.15;
+            letter-spacing: 0.02em;
+        }
 
-      /* Intro text under the title (bigger, wide enough to stay on two lines) */
-      .intro {
-        max-width: 64rem;
-        margin: 72px auto 0;
-        padding: 0 24px;
-        text-align: center;
-        font-family:
-          "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(1.25rem, 3vw, 2rem);
-        line-height: 1.4;
-        color: var(--text-color);
-        text-wrap: balance;
-      }
+        /* Intro text under the title (bigger, wide enough to stay on two lines) */
+        .intro {
+            max-width: 64rem;
+            margin: 72px auto 0;
+            padding: 0 24px;
+            text-align: center;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1rem, 3vw, 2rem);
+            line-height: 1.4;
+            color: var(--text-color);
+            text-wrap: balance;
+        }
 
-      /* Banner image directly under the intro text (no spacing between them) */
-      .banner {
-        display: block;
-        width: min(90%, 720px);
-        height: auto;
-        margin: 0 auto;
-      }
+        /* Banner image directly under the intro text (no spacing between them) */
+        .banner {
+            display: block;
+            width: min(90%, 720px);
+            height: auto;
+            margin: 0 auto;
+        }
 
-      /* ---------- Sky decorations: clouds and twinkling stars ---------- */
-      /* Spans the whole page except the strip covered by the grass, so
+        /* ---------- Sky decorations: clouds and twinkling stars ---------- */
+        /* Spans the whole page except the strip covered by the grass, so
            stars can appear anywhere as long as they're still in the sky. */
-      .sky-decor {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 280px;
-        pointer-events: none;
-        overflow: hidden;
-        z-index: 0;
-      }
-
-      /* Clouds: simple bump shapes that drift sideways across the sky */
-      .cloud {
-        position: absolute;
-        background: #ffffff;
-        border-radius: 40px;
-        opacity: 0.9;
-        box-shadow: 0 8px 18px rgba(42, 120, 208, 0.15); /* new */
-      }
-
-      .cloud::before,
-      .cloud::after {
-        content: "";
-        position: absolute;
-        background: #ffffff;
-        border-radius: 50%;
-      }
-
-      .cloud-1 {
-        top: 4%;
-        left: -220px;
-        width: 130px;
-        height: 44px;
-        animation: drift-cloud 38s linear infinite;
-      }
-      .cloud-1::before {
-        width: 60px;
-        height: 60px;
-        top: -28px;
-        left: 15px;
-      }
-      .cloud-1::after {
-        width: 46px;
-        height: 46px;
-        top: -20px;
-        left: 65px;
-      }
-
-      .cloud-2 {
-        top: 12%;
-        left: -260px;
-        width: 170px;
-        height: 54px;
-        animation: drift-cloud 52s linear infinite;
-        animation-delay: -18s;
-      }
-      .cloud-2::before {
-        width: 74px;
-        height: 74px;
-        top: -34px;
-        left: 20px;
-      }
-      .cloud-2::after {
-        width: 56px;
-        height: 56px;
-        top: -24px;
-        left: 90px;
-      }
-
-      .cloud-3 {
-        top: 2%;
-        left: -180px;
-        width: 110px;
-        height: 38px;
-        animation: drift-cloud 30s linear infinite;
-        animation-delay: -8s;
-      }
-      .cloud-3::before {
-        width: 50px;
-        height: 50px;
-        top: -24px;
-        left: 12px;
-      }
-      .cloud-3::after {
-        width: 38px;
-        height: 38px;
-        top: -16px;
-        left: 55px;
-      }
-
-      .cloud-4 {
-        top: 18%;
-        left: -240px;
-        width: 150px;
-        height: 48px;
-        animation: drift-cloud 46s linear infinite;
-        animation-delay: -30s;
-      }
-      .cloud-4::before {
-        width: 64px;
-        height: 64px;
-        top: -30px;
-        left: 18px;
-      }
-      .cloud-4::after {
-        width: 48px;
-        height: 48px;
-        top: -20px;
-        left: 78px;
-      }
-
-      .cloud-5 {
-        top: 28%;
-        left: -200px;
-        width: 140px;
-        height: 46px;
-        animation: drift-cloud 42s linear infinite;
-        animation-delay: -12s;
-      }
-      .cloud-5::before {
-        width: 62px;
-        height: 62px;
-        top: -30px;
-        left: 16px;
-      }
-      .cloud-5::after {
-        width: 48px;
-        height: 48px;
-        top: -20px;
-        left: 68px;
-      }
-
-      .cloud-6 {
-        top: 38%;
-        left: -250px;
-        width: 160px;
-        height: 50px;
-        animation: drift-cloud 50s linear infinite;
-        animation-delay: -26s;
-      }
-      .cloud-6::before {
-        width: 70px;
-        height: 70px;
-        top: -32px;
-        left: 18px;
-      }
-      .cloud-6::after {
-        width: 52px;
-        height: 52px;
-        top: -22px;
-        left: 82px;
-      }
-
-      .cloud-7 {
-        top: 47%;
-        left: -190px;
-        width: 120px;
-        height: 40px;
-        animation: drift-cloud 34s linear infinite;
-        animation-delay: -4s;
-      }
-      .cloud-7::before {
-        width: 54px;
-        height: 54px;
-        top: -26px;
-        left: 14px;
-      }
-      .cloud-7::after {
-        width: 42px;
-        height: 42px;
-        top: -18px;
-        left: 60px;
-      }
-
-      .cloud-8 {
-        top: 57%;
-        left: -230px;
-        width: 150px;
-        height: 48px;
-        animation: drift-cloud 44s linear infinite;
-        animation-delay: -34s;
-      }
-      .cloud-8::before {
-        width: 64px;
-        height: 64px;
-        top: -30px;
-        left: 18px;
-      }
-      .cloud-8::after {
-        width: 48px;
-        height: 48px;
-        top: -20px;
-        left: 78px;
-      }
-
-      .cloud-9 {
-        top: 67%;
-        left: -210px;
-        width: 135px;
-        height: 44px;
-        animation: drift-cloud 40s linear infinite;
-        animation-delay: -16s;
-      }
-      .cloud-9::before {
-        width: 60px;
-        height: 60px;
-        top: -28px;
-        left: 16px;
-      }
-      .cloud-9::after {
-        width: 46px;
-        height: 46px;
-        top: -18px;
-        left: 66px;
-      }
-
-      .cloud-10 {
-        top: 76%;
-        left: -260px;
-        width: 170px;
-        height: 54px;
-        animation: drift-cloud 54s linear infinite;
-        animation-delay: -40s;
-      }
-      .cloud-10::before {
-        width: 74px;
-        height: 74px;
-        top: -34px;
-        left: 20px;
-      }
-      .cloud-10::after {
-        width: 56px;
-        height: 56px;
-        top: -24px;
-        left: 90px;
-      }
-
-      .cloud-11 {
-        top: 86%;
-        left: -180px;
-        width: 115px;
-        height: 38px;
-        animation: drift-cloud 32s linear infinite;
-        animation-delay: -10s;
-      }
-      .cloud-11::before {
-        width: 52px;
-        height: 52px;
-        top: -26px;
-        left: 14px;
-      }
-      .cloud-11::after {
-        width: 40px;
-        height: 40px;
-        top: -18px;
-        left: 58px;
-      }
-
-      .cloud-12 {
-        top: 93%;
-        left: -240px;
-        width: 150px;
-        height: 48px;
-        animation: drift-cloud 46s linear infinite;
-        animation-delay: -22s;
-      }
-      .cloud-12::before {
-        width: 64px;
-        height: 64px;
-        top: -30px;
-        left: 18px;
-      }
-      .cloud-12::after {
-        width: 48px;
-        height: 48px;
-        top: -20px;
-        left: 78px;
-      }
-
-      @keyframes drift-cloud {
-        from {
-          transform: translateX(0);
+        .sky-decor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 280px;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
         }
-        to {
-          transform: translateX(calc(100vw + 300px));
-        }
-      }
 
-      /* Stars: small dots scattered across the whole sky, each twinkling
+        /* Clouds: simple bump shapes that drift sideways across the sky */
+        .cloud {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 40px;
+            opacity: 0.9;
+            box-shadow: 0 8px 18px rgba(42, 120, 208, 0.15);
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: "";
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+        }
+
+        .cloud-1 { top: 4%;  left: -220px; width: 130px; height: 44px; animation: drift-cloud 38s linear infinite; }
+        .cloud-1::before { width: 60px; height: 60px; top: -28px; left: 15px; }
+        .cloud-1::after  { width: 46px; height: 46px; top: -20px; left: 65px; }
+
+        .cloud-2 { top: 12%; left: -260px; width: 170px; height: 54px; animation: drift-cloud 52s linear infinite; animation-delay: -18s; }
+        .cloud-2::before { width: 74px; height: 74px; top: -34px; left: 20px; }
+        .cloud-2::after  { width: 56px; height: 56px; top: -24px; left: 90px; }
+
+        .cloud-3 { top: 2%;  left: -180px; width: 110px; height: 38px; animation: drift-cloud 30s linear infinite; animation-delay: -8s; }
+        .cloud-3::before { width: 50px; height: 50px; top: -24px; left: 12px; }
+        .cloud-3::after  { width: 38px; height: 38px; top: -16px; left: 55px; }
+
+        .cloud-4 { top: 18%; left: -240px; width: 150px; height: 48px; animation: drift-cloud 46s linear infinite; animation-delay: -30s; }
+        .cloud-4::before { width: 64px; height: 64px; top: -30px; left: 18px; }
+        .cloud-4::after  { width: 48px; height: 48px; top: -20px; left: 78px; }
+
+        .cloud-5 { top: 28%; left: -200px; width: 140px; height: 46px; animation: drift-cloud 42s linear infinite; animation-delay: -12s; }
+        .cloud-5::before { width: 62px; height: 62px; top: -30px; left: 16px; }
+        .cloud-5::after  { width: 48px; height: 48px; top: -20px; left: 68px; }
+
+        .cloud-6 { top: 38%; left: -250px; width: 160px; height: 50px; animation: drift-cloud 50s linear infinite; animation-delay: -26s; }
+        .cloud-6::before { width: 70px; height: 70px; top: -32px; left: 18px; }
+        .cloud-6::after  { width: 52px; height: 52px; top: -22px; left: 82px; }
+
+        .cloud-7 { top: 47%; left: -190px; width: 120px; height: 40px; animation: drift-cloud 34s linear infinite; animation-delay: -4s; }
+        .cloud-7::before { width: 54px; height: 54px; top: -26px; left: 14px; }
+        .cloud-7::after  { width: 42px; height: 42px; top: -18px; left: 60px; }
+
+        .cloud-8 { top: 57%; left: -230px; width: 150px; height: 48px; animation: drift-cloud 44s linear infinite; animation-delay: -34s; }
+        .cloud-8::before { width: 64px; height: 64px; top: -30px; left: 18px; }
+        .cloud-8::after  { width: 48px; height: 48px; top: -20px; left: 78px; }
+
+        .cloud-9 { top: 67%; left: -210px; width: 135px; height: 44px; animation: drift-cloud 40s linear infinite; animation-delay: -16s; }
+        .cloud-9::before { width: 60px; height: 60px; top: -28px; left: 16px; }
+        .cloud-9::after  { width: 46px; height: 46px; top: -18px; left: 66px; }
+
+        .cloud-10 { top: 76%; left: -260px; width: 170px; height: 54px; animation: drift-cloud 54s linear infinite; animation-delay: -40s; }
+        .cloud-10::before { width: 74px; height: 74px; top: -34px; left: 20px; }
+        .cloud-10::after  { width: 56px; height: 56px; top: -24px; left: 90px; }
+
+        .cloud-11 { top: 86%; left: -180px; width: 115px; height: 38px; animation: drift-cloud 32s linear infinite; animation-delay: -10s; }
+        .cloud-11::before { width: 52px; height: 52px; top: -26px; left: 14px; }
+        .cloud-11::after  { width: 40px; height: 40px; top: -18px; left: 58px; }
+
+        .cloud-12 { top: 93%; left: -240px; width: 150px; height: 48px; animation: drift-cloud 46s linear infinite; animation-delay: -22s; }
+        .cloud-12::before { width: 64px; height: 64px; top: -30px; left: 18px; }
+        .cloud-12::after  { width: 48px; height: 48px; top: -20px; left: 78px; }
+
+        @keyframes drift-cloud {
+            from { transform: translateX(0); }
+            to   { transform: translateX(calc(100vw + 300px)); }
+        }
+
+        /* Stars: small dots scattered across the whole sky, each twinkling
            on its own random-looking timer and duration. */
-      .star {
-        position: absolute;
-        width: 4px;
-        height: 4px;
-        background: #ffffff;
-        border-radius: 50%;
-        box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.9);
-        animation-name: twinkle;
-        animation-timing-function: ease-in-out;
-        animation-iteration-count: infinite;
-      }
-
-      .star-1 {
-        top: 4%;
-        left: 8%;
-        animation-duration: 2.4s;
-        animation-delay: 0s;
-      }
-      .star-2 {
-        top: 12%;
-        left: 30%;
-        animation-duration: 3.1s;
-        animation-delay: 0.6s;
-      }
-      .star-3 {
-        top: 7%;
-        left: 62%;
-        animation-duration: 2.7s;
-        animation-delay: 1.2s;
-      }
-      .star-4 {
-        top: 18%;
-        left: 85%;
-        animation-duration: 3.4s;
-        animation-delay: 0.3s;
-      }
-      .star-5 {
-        top: 24%;
-        left: 15%;
-        animation-duration: 2.2s;
-        animation-delay: 1.6s;
-      }
-      .star-6 {
-        top: 31%;
-        left: 48%;
-        animation-duration: 3s;
-        animation-delay: 0.9s;
-      }
-      .star-7 {
-        top: 27%;
-        left: 72%;
-        animation-duration: 2.6s;
-        animation-delay: 2.1s;
-      }
-      .star-8 {
-        top: 38%;
-        left: 5%;
-        animation-duration: 3.3s;
-        animation-delay: 1.4s;
-      }
-      .star-9 {
-        top: 45%;
-        left: 36%;
-        animation-duration: 2.5s;
-        animation-delay: 0.2s;
-      }
-      .star-10 {
-        top: 42%;
-        left: 90%;
-        animation-duration: 2.9s;
-        animation-delay: 1.9s;
-      }
-      .star-11 {
-        top: 55%;
-        left: 20%;
-        animation-duration: 3.2s;
-        animation-delay: 0.7s;
-      }
-      .star-12 {
-        top: 52%;
-        left: 58%;
-        animation-duration: 2.3s;
-        animation-delay: 1.1s;
-      }
-      .star-13 {
-        top: 63%;
-        left: 78%;
-        animation-duration: 3.5s;
-        animation-delay: 0.4s;
-      }
-      .star-14 {
-        top: 70%;
-        left: 10%;
-        animation-duration: 2.8s;
-        animation-delay: 1.8s;
-      }
-      .star-15 {
-        top: 68%;
-        left: 44%;
-        animation-duration: 2.4s;
-        animation-delay: 0.9s;
-      }
-      .star-16 {
-        top: 78%;
-        left: 65%;
-        animation-duration: 3.1s;
-        animation-delay: 1.3s;
-      }
-      .star-17 {
-        top: 85%;
-        left: 25%;
-        animation-duration: 2.7s;
-        animation-delay: 0.5s;
-      }
-      .star-18 {
-        top: 92%;
-        left: 82%;
-        animation-duration: 3s;
-        animation-delay: 1.6s;
-      }
-
-      @keyframes twinkle {
-        0%,
-        100% {
-          opacity: 0.2;
-          transform: scale(0.7);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1.4);
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .cloud,
-        .star,
-        .godparents-list li {
-          animation: none;
-        }
-      }
-
-      /* ---------- The scroll (drag the bottom rod down to open it) ---------- */
-      .scroll {
-        position: relative;
-        width: min(88%, 560px);
-        margin: 48px auto 0; /* space between the banner and the scroll */
-        user-select: none;
-        -webkit-user-select: none;
-      }
-
-      .rod {
-        position: relative;
-        height: 30px;
-        border-radius: 15px;
-        background: linear-gradient(
-          to bottom,
-          var(--rod-light),
-          #7a4a24 50%,
-          var(--rod-dark)
-        );
-        box-shadow: 0 4px 8px rgba(40, 20, 0, 0.3);
-      }
-
-      /* Golden end caps on both sides of each rod */
-      .rod::before,
-      .rod::after {
-        content: "";
-        position: absolute;
-        top: -5px;
-        width: 16px;
-        height: 40px;
-        border-radius: 8px;
-        background: linear-gradient(
-          to bottom,
-          #f3d27a,
-          var(--rod-cap) 50%,
-          #a87d24
-        );
-      }
-
-      .rod::before {
-        left: -8px;
-      }
-      .rod::after {
-        right: -8px;
-      }
-
-      /* The bottom rod is the handle you drag */
-      .handle {
-        cursor: grab;
-        touch-action: none;
-        outline: none;
-      }
-
-      .handle:active {
-        cursor: grabbing;
-      }
-
-      .handle:focus-visible {
-        box-shadow:
-          0 0 0 3px #ffffff,
-          0 0 0 6px var(--text-color);
-      }
-
-      /* Little down arrow on the handle. It flips up when the scroll is open. */
-      .handle .arrow {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 10px;
-        height: 10px;
-        border-right: 3px solid #f3d27a;
-        border-bottom: 3px solid #f3d27a;
-        transform: translate(-50%, -75%) rotate(45deg);
-        transition: transform 0.3s ease;
-      }
-
-      .scroll.is-open .handle .arrow {
-        transform: translate(-50%, -25%) rotate(225deg);
-      }
-
-      /* The parchment: its height grows as you drag, revealing what is inside */
-      .paper {
-        height: 0;
-        margin: 0 14px;
-        overflow: hidden;
-        background:
-          linear-gradient(
-            to right,
-            rgba(120, 80, 30, 0.28),
-            transparent 7%,
-            transparent 93%,
-            rgba(120, 80, 30, 0.28)
-          ),
-          var(--parchment);
-        transition: height 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
-      }
-
-      .paper.dragging {
-        transition: none;
-      }
-
-      .paper-inner {
-        padding: 36px 24px 44px;
-        text-align: center;
-      }
-
-      /* "Event Details" heading inside the scroll */
-      .details-title {
-        margin: 0;
-        font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(2rem, 6vw, 3rem);
-        font-weight: normal;
-        line-height: 1.1;
-        color: var(--text-color);
-      }
-
-      /* Date inside the scroll */
-      .event-date {
-        margin: 24px 0 0;
-        font-family:
-          "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(1.75rem, 5vw, 2.5rem);
-        font-weight: normal;
-        line-height: 1.2;
-        color: var(--text-color);
-      }
-
-      /* Make the "28" bigger than the rest of the date */
-      .event-date .day {
-        font-size: 1.9em;
-        line-height: 1;
-      }
-
-      /* Day of the week under the date */
-      .event-day {
-        margin: 8px 0 0;
-        font-family:
-          "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(1.5rem, 4vw, 2.5rem);
-        font-weight: normal;
-        line-height: 1.2;
-        color: var(--text-color);
-      }
-
-      /* Holds the Christening and Party rows */
-      .events {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 40px;
-        width: fit-content;
-        max-width: 100%;
-        margin: 48px auto 0; /* the space under "Saturday" */
-      }
-
-      /* Each row: image and text side by side */
-      .christening,
-      .party {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .christening-icon {
-        flex: 0 0 auto;
-        width: clamp(56px, 11vw, 88px);
-        height: auto;
-      }
-
-      .christening-text {
-        text-align: center;
-      }
-
-      /* "Christening" / "Party" and their time sit side by side with a space between */
-      .christening-line {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: baseline;
-        column-gap: 32px;
-      }
-
-      .christening-title,
-      .christening-time {
-        margin: 0;
-        font-family:
-          "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(1.25rem, 3.6vw, 2rem);
-        font-weight: normal;
-        line-height: 1.2;
-        color: var(--text-color);
-      }
-
-      /* Venue under the title and time (used by both rows) */
-      .christening-venue {
-        margin: 8px 0 0;
-        font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(1.1rem, 3vw, 1.2rem);
-        font-weight: normal;
-        line-height: 1.25;
-        color: var(--text-color);
-      }
-
-      /* "View Location" button, styled like the scroll rods (wood with golden caps) */
-      .location-btn {
-        position: relative;
-        display: inline-block;
-        margin-top: 16px;
-        padding: 8px 30px;
-        border-radius: 999px;
-        background: linear-gradient(
-          to bottom,
-          var(--rod-light),
-          #7a4a24 50%,
-          var(--rod-dark)
-        );
-        box-shadow: 0 4px 8px rgba(40, 20, 0, 0.3);
-        font-family:
-          "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(1rem, 2.4vw, 1.3rem);
-        line-height: 1.2;
-        color: var(--text-color);
-        text-decoration: none;
-        transition:
-          filter 0.2s ease,
-          transform 0.2s ease;
-      }
-
-      /* Golden end caps, same as the scroll rods */
-      .location-btn::before,
-      .location-btn::after {
-        content: "";
-        position: absolute;
-        top: -5px;
-        bottom: -5px;
-        width: 14px;
-        border-radius: 7px;
-        background: linear-gradient(
-          to bottom,
-          #f3d27a,
-          var(--rod-cap) 50%,
-          #a87d24
-        );
-      }
-
-      .location-btn::before {
-        left: -7px;
-      }
-      .location-btn::after {
-        right: -7px;
-      }
-
-      .location-btn:hover {
-        filter: brightness(1.15);
-        transform: translateY(-1px);
-      }
-
-      .location-btn:active {
-        transform: translateY(1px);
-      }
-
-      .location-btn:focus-visible {
-        outline: none;
-        box-shadow:
-          0 0 0 3px #ffffff,
-          0 0 0 6px var(--text-color);
-      }
-
-      /* ---------- Countdown, at the bottom of the scroll ---------- */
-      .countdown {
-        margin: 48px 0 0;
-        padding-top: 28px;
-        border-top: 2px dashed var(--rod-light);
-      }
-
-      .countdown-label {
-        margin: 0 0 16px;
-        font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(1.3rem, 3.6vw, 2rem);
-        font-weight: normal;
-        line-height: 1.1;
-        color: var(--text-color);
-      }
-
-      .countdown-units {
-        display: flex;
-        justify-content: center;
-        gap: 14px;
-      }
-
-      /* Each unit is a small wooden plaque, matching the scroll's rod colors */
-      .countdown-unit {
-        position: relative;
-        min-width: 78px;
-        padding: 12px 10px;
-        border-radius: 12px;
-        background: linear-gradient(
-          to bottom,
-          var(--rod-light),
-          #7a4a24 50%,
-          var(--rod-dark)
-        );
-        box-shadow: 0 4px 8px rgba(40, 20, 0, 0.3);
-      }
-
-      .countdown-unit::before,
-      .countdown-unit::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        width: 10px;
-        height: 26px;
-        border-radius: 5px;
-        transform: translateY(-50%);
-        background: linear-gradient(
-          to bottom,
-          #f3d27a,
-          var(--rod-cap) 50%,
-          #a87d24
-        );
-      }
-
-      .countdown-unit::before {
-        left: -5px;
-      }
-      .countdown-unit::after {
-        right: -5px;
-      }
-
-      .countdown-value {
-        display: block;
-        font-family:
-          "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(1.5rem, 4.2vw, 2.2rem);
-        line-height: 1.1;
-        color: var(--text-color);
-      }
-
-      .countdown-unit-label {
-        display: block;
-        margin-top: 4px;
-        font-family:
-          "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(0.75rem, 2vw, 0.95rem);
-        color: var(--text-color);
-      }
-
-      @media (max-width: 420px) {
-        .countdown-units {
-          gap: 8px;
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.9);
+            animation-name: twinkle;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
         }
 
-        .countdown-unit {
-          min-width: 64px;
-          padding: 10px 6px;
+        .star-1  { top: 4%;  left: 8%;  animation-duration: 2.4s; animation-delay: 0s; }
+        .star-2  { top: 12%; left: 30%; animation-duration: 3.1s; animation-delay: 0.6s; }
+        .star-3  { top: 7%;  left: 62%; animation-duration: 2.7s; animation-delay: 1.2s; }
+        .star-4  { top: 18%; left: 85%; animation-duration: 3.4s; animation-delay: 0.3s; }
+        .star-5  { top: 24%; left: 15%; animation-duration: 2.2s; animation-delay: 1.6s; }
+        .star-6  { top: 31%; left: 48%; animation-duration: 3.0s; animation-delay: 0.9s; }
+        .star-7  { top: 27%; left: 72%; animation-duration: 2.6s; animation-delay: 2.1s; }
+        .star-8  { top: 38%; left: 5%;  animation-duration: 3.3s; animation-delay: 1.4s; }
+        .star-9  { top: 45%; left: 36%; animation-duration: 2.5s; animation-delay: 0.2s; }
+        .star-10 { top: 42%; left: 90%; animation-duration: 2.9s; animation-delay: 1.9s; }
+        .star-11 { top: 55%; left: 20%; animation-duration: 3.2s; animation-delay: 0.7s; }
+        .star-12 { top: 52%; left: 58%; animation-duration: 2.3s; animation-delay: 1.1s; }
+        .star-13 { top: 63%; left: 78%; animation-duration: 3.5s; animation-delay: 0.4s; }
+        .star-14 { top: 70%; left: 10%; animation-duration: 2.8s; animation-delay: 1.8s; }
+        .star-15 { top: 68%; left: 44%; animation-duration: 2.4s; animation-delay: 0.9s; }
+        .star-16 { top: 78%; left: 65%; animation-duration: 3.1s; animation-delay: 1.3s; }
+        .star-17 { top: 85%; left: 25%; animation-duration: 2.7s; animation-delay: 0.5s; }
+        .star-18 { top: 92%; left: 82%; animation-duration: 3.0s; animation-delay: 1.6s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.7); }
+            50%      { opacity: 1;   transform: scale(1.4); }
         }
-      }
 
-      /* ---------- Godparents: no panel, each name floats in its own little cloud ---------- */
-      .godparents {
-        width: min(92%, 680px);
-        margin: 64px auto 0;
-        text-align: center;
-      }
-
-      .godparents-title {
-        margin: 0 0 28px;
-        text-align: center;
-        font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(1.8rem, 5vw, 2.75rem);
-        font-weight: normal;
-        line-height: 1.1;
-        color: #ffffff;
-        text-shadow:
-          -2px -2px 0 var(--outline-color),
-          2px -2px 0 var(--outline-color),
-          -2px 2px 0 var(--outline-color),
-          2px 2px 0 var(--outline-color),
-          0 2px 0 var(--outline-color),
-          0 -2px 0 var(--outline-color),
-          2px 0 0 var(--outline-color),
-          -2px 0 0 var(--outline-color);
-      }
-
-      .godparents-columns {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 32px 48px;
-      }
-
-      .godparents-column {
-        flex: 1 1 200px;
-        max-width: 260px;
-        text-align: center;
-      }
-
-      /* The Godfather column holds two sub-lists side by side, so it needs more room */
-      .godparents-column--wide {
-        flex-basis: 320px;
-        max-width: 360px;
-      }
-
-      .godparents-column-title {
-        margin: 0 0 18px;
-        padding-bottom: 10px;
-        border-bottom: 2px dashed #652c89;
-        font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(1.2rem, 3.2vw, 1.6rem);
-        font-weight: normal;
-        line-height: 1.1;
-        color: #ffffff;
-        text-shadow:
-          -2px -2px 0 var(--outline-color),
-          2px -2px 0 var(--outline-color),
-          -2px 2px 0 var(--outline-color),
-          2px 2px 0 var(--outline-color),
-          0 2px 0 var(--outline-color),
-          0 -2px 0 var(--outline-color),
-          2px 0 0 var(--outline-color),
-          -2px 0 0 var(--outline-color);
-      }
-
-      /* Splits a long name list (like Godfather) into two side-by-side sub-lists */
-      .godparents-subcolumns {
-        display: flex;
-        justify-content: center;
-        gap: 10px 20px;
-      }
-
-      .godparents-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 18px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      /* Each name sits in its own small cloud chip that drifts slightly, as if afloat in the sky */
-      .godparents-list li {
-        position: relative;
-        display: inline-block;
-        background: #ffffff;
-        border-radius: 999px;
-        padding: 9px 20px;
-        font-family:
-          "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-        font-size: clamp(0.85rem, 2.1vw, 1rem);
-        line-height: 1.3;
-        white-space: nowrap;
-        color: #652c89;
-        box-shadow: 0 4px 10px rgba(40, 20, 0, 0.18);
-        animation: drift-name var(--name-dur, 6s) ease-in-out infinite;
-        animation-delay: var(--name-delay, 0s);
-      }
-
-      /* Little puffs on top of each name-cloud, like the bigger sky clouds */
-      .godparents-list li::before,
-      .godparents-list li::after {
-        content: "";
-        position: absolute;
-        background: #ffffff;
-        border-radius: 50%;
-      }
-
-      .godparents-list li::before {
-        width: 16px;
-        height: 16px;
-        top: -8px;
-        left: 14px;
-        box-shadow:
-          15px -3px 0 -1px #ffffff,
-          28px 1px 0 -4px #ffffff;
-      }
-
-      .godparents-list li::after {
-        width: 12px;
-        height: 12px;
-        top: -5px;
-        right: 18px;
-        box-shadow: -14px -2px 0 -2px #ffffff;
-      }
-
-      /* A handful of duration/delay variants, cycled across the names, so the
-           floating motion looks independent and not perfectly synced. */
-      .godparents-list li:nth-child(6n + 1) {
-        --name-dur: 5.2s;
-        --name-delay: 0s;
-      }
-      .godparents-list li:nth-child(6n + 2) {
-        --name-dur: 6.4s;
-        --name-delay: 0.6s;
-      }
-      .godparents-list li:nth-child(6n + 3) {
-        --name-dur: 4.8s;
-        --name-delay: 1.1s;
-      }
-      .godparents-list li:nth-child(6n + 4) {
-        --name-dur: 7.1s;
-        --name-delay: 0.3s;
-      }
-      .godparents-list li:nth-child(6n + 5) {
-        --name-dur: 5.6s;
-        --name-delay: 1.4s;
-      }
-      .godparents-list li:nth-child(6n + 6) {
-        --name-dur: 6.9s;
-        --name-delay: 0.8s;
-      }
-
-      @keyframes drift-name {
-        0% {
-          transform: translate(0, 0) rotate(0deg);
+        @media (prefers-reduced-motion: reduce) {
+            .cloud,
+            .star,
+            .godparents-list li {
+                animation: none;
+            }
         }
-        25% {
-          transform: translate(3px, -4px) rotate(0.6deg);
-        }
-        50% {
-          transform: translate(-3px, 2px) rotate(-0.5deg);
-        }
-        75% {
-          transform: translate(2px, 4px) rotate(0.4deg);
-        }
-        100% {
-          transform: translate(0, 0) rotate(0deg);
-        }
-      }
 
-      /* The grass: only appears once you reach the bottom of the page. */
-      .grass {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 280px;
-        z-index: 1;
-        background:
-                /* front blades (same color as the ground so they blend into it) */
-          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='60' viewBox='0 0 100 60'%3E%3Cpath fill='%234a9a2a' d='M0 60 Q4 32 10 8 Q16 34 22 60Z M20 60 Q26 36 34 16 Q38 40 44 60Z M42 60 Q50 30 56 2 Q62 34 66 60Z M64 60 Q72 36 80 12 Q82 40 88 60Z M86 60 Q92 32 100 6 L100 60Z'/%3E%3C/svg%3E")
-            repeat-x left 0 bottom 190px / 100px 60px,
-          /* the ground itself */
-          linear-gradient(
-              to bottom,
-              var(--grass-front) 0%,
-              var(--grass-ground) 100%
-            )
-            no-repeat left bottom / 100% 200px,
-          /* back blades (lighter, taller, peeking out behind) */
-          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='84' viewBox='0 0 140 84'%3E%3Cpath fill='%236cbb3c' d='M0 84 Q6 44 14 10 Q22 46 30 84Z M28 84 Q36 50 48 22 Q54 54 62 84Z M60 84 Q70 40 80 4 Q88 46 96 84Z M94 84 Q104 50 114 18 Q120 52 126 84Z M124 84 Q130 46 140 12 L140 84Z'/%3E%3C/svg%3E")
-            repeat-x left 35px bottom 190px / 140px 84px;
-      }
-
-      @media (max-width: 600px) {
-        .grass {
-          height: 220px;
-          background-size:
-            70px 42px,
-            100% 150px,
-            100px 60px;
-          background-position:
-            left 0 bottom 140px,
-            left bottom,
-            left 25px bottom 140px;
+        /* ---------- The scroll (drag the bottom rod down to open it) ---------- */
+        .scroll {
+            position: relative;
+            width: min(88%, 560px);
+            margin: 48px auto 0; /* space between the banner and the scroll */
+            user-select: none;
+            -webkit-user-select: none;
         }
-      }
 
-      @media (prefers-reduced-motion: reduce) {
-        .paper,
-        .handle .arrow,
+        .rod {
+            position: relative;
+            height: 30px;
+            border-radius: 15px;
+            background: linear-gradient(to bottom, var(--rod-light), #7a4a24 50%, var(--rod-dark));
+            box-shadow: 0 4px 8px rgba(40, 20, 0, 0.3);
+        }
+
+        /* Golden end caps on both sides of each rod */
+        .rod::before,
+        .rod::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            width: 16px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(to bottom, #f3d27a, var(--rod-cap) 50%, #a87d24);
+        }
+
+        .rod::before { left: -8px; }
+        .rod::after  { right: -8px; }
+
+        /* The bottom rod is the handle you drag */
+        .handle {
+            cursor: grab;
+            touch-action: none;
+            outline: none;
+        }
+
+        .handle:active {
+            cursor: grabbing;
+        }
+
+        .handle:focus-visible {
+            box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px var(--text-color);
+        }
+
+        /* Little down arrow on the handle. It flips up when the scroll is open. */
+        .handle .arrow {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 10px;
+            height: 10px;
+            border-right: 3px solid #f3d27a;
+            border-bottom: 3px solid #f3d27a;
+            transform: translate(-50%, -75%) rotate(45deg);
+            transition: transform 0.3s ease;
+        }
+
+        .scroll.is-open .handle .arrow {
+            transform: translate(-50%, -25%) rotate(225deg);
+        }
+
+        /* The parchment: its height grows as you drag, revealing what is inside */
+        .paper {
+            height: 0;
+            margin: 0 14px;
+            overflow: hidden;
+            background:
+                linear-gradient(to right, rgba(120, 80, 30, 0.28), transparent 7%, transparent 93%, rgba(120, 80, 30, 0.28)),
+                var(--parchment);
+            transition: height 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .paper.dragging {
+            transition: none;
+        }
+
+        .paper-inner {
+            padding: 36px 24px 44px;
+            text-align: center;
+        }
+
+        /* "Event Details" heading inside the scroll */
+        .details-title {
+            margin: 0;
+            font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: normal;
+            line-height: 1.1;
+            color: var(--text-color);
+        }
+
+        /* Date inside the scroll */
+        .event-date {
+            margin: 24px 0 0;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-weight: normal;
+            line-height: 1.2;
+            color: var(--text-color);
+        }
+
+        /* Make the "28" bigger than the rest of the date */
+        .event-date .day {
+            font-size: 1.65em;
+            line-height: 1;
+        }
+
+        /* Day of the week under the date */
+        .event-day {
+            margin: 8px 0 0;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.25rem, 4vw, 2.5rem);
+            font-weight: normal;
+            line-height: 1.2;
+            color: var(--text-color);
+        }
+
+        /* Holds the Christening and Party rows */
+        .events {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 40px;
+            width: fit-content;
+            max-width: 100%;
+            margin: 48px auto 0; /* the space under "Saturday" */
+        }
+
+        /* Each row: image and text side by side */
+        .christening,
+        .party {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .christening-icon {
+            flex: 0 0 auto;
+            width: clamp(56px, 11vw, 88px);
+            height: auto;
+        }
+
+        .christening-text {
+            text-align: center;
+        }
+
+        /* "Christening" / "Party" and their time sit side by side with a space between */
+        .christening-line {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: baseline;
+            column-gap: 32px;
+        }
+
+        .christening-title,
+        .christening-time {
+            margin: 0;
+            font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1rem, 3.6vw, 2rem);
+            font-weight: normal;
+            line-height: 1.2;
+            color: var(--text-color);
+        }
+
+        /* Venue under the title and time (used by both rows) */
+        .christening-venue {
+            margin: 8px 0 0;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.25rem, 3vw, 1.2rem);
+            font-weight: normal;
+            line-height: 1.25;
+            color: var(--text-color);
+        }
+
+        /* "View Location" button, styled like the scroll rods (wood with golden caps) */
         .location-btn {
-          transition: none;
+            position: relative;
+            display: inline-block;
+            margin-top: 16px;
+            padding: 8px 30px;
+            border-radius: 999px;
+            background: linear-gradient(to bottom, var(--rod-light), #7a4a24 50%, var(--rod-dark));
+            box-shadow: 0 4px 8px rgba(40, 20, 0, 0.3);
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1rem, 2.4vw, 1.3rem);
+            line-height: 1.2;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: filter 0.2s ease, transform 0.2s ease;
         }
-      }
+
+        /* Golden end caps, same as the scroll rods */
+        .location-btn::before,
+        .location-btn::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            bottom: -5px;
+            width: 14px;
+            border-radius: 7px;
+            background: linear-gradient(to bottom, #f3d27a, var(--rod-cap) 50%, #a87d24);
+        }
+
+        .location-btn::before { left: -7px; }
+        .location-btn::after  { right: -7px; }
+
+        .location-btn:hover {
+            filter: brightness(1.15);
+            transform: translateY(-1px);
+        }
+
+        .location-btn:active {
+            transform: translateY(1px);
+        }
+
+        .location-btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px var(--text-color);
+        }
+
+        /* ---------- Countdown, at the bottom of the scroll ---------- */
+        .countdown {
+            margin: 48px 0 0;
+            padding-top: 28px;
+            border-top: 2px dashed var(--rod-light);
+        }
+
+        .countdown-label {
+            margin: 0 0 16px;
+            font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.3rem, 3.6vw, 2rem);
+            font-weight: normal;
+            line-height: 1.1;
+            color: var(--text-color);
+        }
+
+        .countdown-units {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        /* Each unit is a small wooden plaque, matching the scroll's rod colors */
+        .countdown-unit {
+            position: relative;
+            min-width: 78px;
+            padding: 12px 10px;
+            border-radius: 12px;
+            background: linear-gradient(to bottom, var(--rod-light), #7a4a24 50%, var(--rod-dark));
+            box-shadow: 0 4px 8px rgba(40, 20, 0, 0.3);
+        }
+
+        .countdown-unit::before,
+        .countdown-unit::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 10px;
+            height: 26px;
+            border-radius: 5px;
+            transform: translateY(-50%);
+            background: linear-gradient(to bottom, #f3d27a, var(--rod-cap) 50%, #a87d24);
+        }
+
+        .countdown-unit::before { left: -5px; }
+        .countdown-unit::after  { right: -5px; }
+
+        .countdown-value {
+            display: block;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.5rem, 4.2vw, 2.2rem);
+            line-height: 1.1;
+            color: var(--text-color);
+        }
+
+        .countdown-unit-label {
+            display: block;
+            margin-top: 4px;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(0.75rem, 2vw, 0.95rem);
+            color: var(--text-color);
+        }
+
+        @media (max-width: 420px) {
+            .countdown-units {
+                gap: 8px;
+            }
+
+            .countdown-unit {
+                min-width: 64px;
+                padding: 10px 6px;
+            }
+        }
+
+        /* ---------- Godparents: no panel, each name floats in its own little cloud ---------- */
+        .godparents {
+            width: min(92%, 680px);
+            margin: 64px auto 0;
+            text-align: center;
+        }
+
+        .godparents-title {
+            margin: 0 0 28px;
+            text-align: center;
+            font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.75rem, 5vw, 2.75rem);
+            font-weight: normal;
+            line-height: 1.1;
+            color: #ffffff;
+            text-shadow:
+                -2px -2px 0 var(--outline-color),
+                 2px -2px 0 var(--outline-color),
+                -2px  2px 0 var(--outline-color),
+                 2px  2px 0 var(--outline-color),
+                 0    2px 0 var(--outline-color),
+                 0   -2px 0 var(--outline-color),
+                 2px  0   0 var(--outline-color),
+                -2px  0   0 var(--outline-color);
+        }
+
+        .godparents-columns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px 48px;
+        }
+
+        .godparents-column {
+            flex: 1 1 200px;
+            max-width: 260px;
+            text-align: center;
+        }
+
+        /* The Godfather column holds two sub-lists side by side, so it needs more room */
+        .godparents-column--wide {
+            flex-basis: 320px;
+            max-width: 360px;
+        }
+
+        .godparents-column-title {
+            margin: 0 0 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #652c89;
+            font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.2rem, 3.2vw, 1.6rem);
+            font-weight: normal;
+            line-height: 1.1;
+            color: #ffffff;
+            text-shadow:
+                -2px -2px 0 var(--outline-color),
+                 2px -2px 0 var(--outline-color),
+                -2px  2px 0 var(--outline-color),
+                 2px  2px 0 var(--outline-color),
+                 0    2px 0 var(--outline-color),
+                 0   -2px 0 var(--outline-color),
+                 2px  0   0 var(--outline-color),
+                -2px  0   0 var(--outline-color);
+        }
+
+        /* Splits a long name list (like Godfather) into two side-by-side sub-lists */
+        .godparents-subcolumns {
+            display: flex;
+            justify-content: center;
+            gap: 10px 20px;
+        }
+
+        .godparents-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        /* Each name sits in its own small cloud chip that drifts slightly, as if afloat in the sky */
+        .godparents-list li {
+            position: relative;
+            display: inline-block;
+            background: #ffffff;
+            border-radius: 999px;
+            padding: 9px 20px;
+            font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(0.85rem, 2.1vw, 1rem);
+            line-height: 1.3;
+            white-space: nowrap;
+            color: #652c89;
+            box-shadow: 0 4px 10px rgba(40, 20, 0, 0.18);
+            animation: drift-name var(--name-dur, 6s) ease-in-out infinite;
+            animation-delay: var(--name-delay, 0s);
+        }
+
+        /* Little puffs on top of each name-cloud, like the bigger sky clouds */
+        .godparents-list li::before,
+        .godparents-list li::after {
+            content: "";
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+        }
+
+        .godparents-list li::before {
+            width: 16px;
+            height: 16px;
+            top: -8px;
+            left: 14px;
+            box-shadow:
+                15px -3px 0 -1px #ffffff,
+                28px 1px 0 -4px #ffffff;
+        }
+
+        .godparents-list li::after {
+            width: 12px;
+            height: 12px;
+            top: -5px;
+            right: 18px;
+            box-shadow:
+                -14px -2px 0 -2px #ffffff;
+        }
+
+        /* A handful of duration/delay variants, cycled across the names, so the
+           floating motion looks independent and not perfectly synced. */
+        .godparents-list li:nth-child(6n+1) { --name-dur: 5.2s; --name-delay: 0s; }
+        .godparents-list li:nth-child(6n+2) { --name-dur: 6.4s; --name-delay: 0.6s; }
+        .godparents-list li:nth-child(6n+3) { --name-dur: 4.8s; --name-delay: 1.1s; }
+        .godparents-list li:nth-child(6n+4) { --name-dur: 7.1s; --name-delay: 0.3s; }
+        .godparents-list li:nth-child(6n+5) { --name-dur: 5.6s; --name-delay: 1.4s; }
+        .godparents-list li:nth-child(6n+6) { --name-dur: 6.9s; --name-delay: 0.8s; }
+
+        @keyframes drift-name {
+            0%   { transform: translate(0, 0) rotate(0deg); }
+            25%  { transform: translate(3px, -4px) rotate(0.6deg); }
+            50%  { transform: translate(-3px, 2px) rotate(-0.5deg); }
+            75%  { transform: translate(2px, 4px) rotate(0.4deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* ---------- Dress Code: a slider through the five palette images ---------- */
+        .dress-code {
+            width: min(92%, 680px);
+            margin: 64px auto 0;
+            text-align: center;
+        }
+
+        .dress-code-title {
+            margin: 0 0 28px;
+            text-align: center;
+            font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            font-size: clamp(1.3rem, 6vw, 2.75rem);
+            font-weight: normal;
+            line-height: 1.1;
+            color: #ffffff;
+            text-shadow:
+                -2px -2px 0 var(--outline-color),
+                 2px -2px 0 var(--outline-color),
+                -2px  2px 0 var(--outline-color),
+                 2px  2px 0 var(--outline-color),
+                 0    2px 0 var(--outline-color),
+                 0   -2px 0 var(--outline-color),
+                 2px  0   0 var(--outline-color),
+                -2px  0   0 var(--outline-color);
+        }
+
+        /* Slider: one palette image at a time, wood-rod arrows and purple dots to match the page */
+        .dress-slider {
+            position: relative;
+            width: min(100%, 420px);
+            margin: 0 auto;
+        }
+
+.dress-slider-viewport {
+    overflow: hidden;
+    border-radius: 20px;
+    background: transparent; /* was #ffffff, with a box-shadow that's now removed */
+}
+
+        .dress-slider-track {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .dress-slide {
+            flex: 0 0 100%;
+            aspect-ratio: 4 / 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dress-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Prev/Next arrows, styled like the scroll's wooden rods */
+.dress-slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--outline-color);  /* was: border: none */
+    border-radius: 50%;
+    background: #ffffff;                      /* was: wood gradient */
+    color: var(--outline-color);               /* was: #f3d27a */
+    font-size: 1rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(40, 20, 0, 0.2);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dress-slider-btn:hover {
+    background: var(--outline-color);   /* was: filter: brightness(1.15) */
+    color: #ffffff;
+}
+
+        .dress-slider-btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px var(--outline-color);
+        }
+
+        .dress-slider-prev { left: 8px; }
+        .dress-slider-next { right: 8px; }
+
+        /* Dots */
+        .dress-slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .dress-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: inset 0 0 0 2px var(--outline-color);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .dress-dot.is-active {
+            background: var(--outline-color);
+        }
+
+        /* The grass: only appears once you reach the bottom of the page. */
+        .grass {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 280px;
+            z-index: 1;
+            background:
+                /* front blades (same color as the ground so they blend into it) */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='60' viewBox='0 0 100 60'%3E%3Cpath fill='%234a9a2a' d='M0 60 Q4 32 10 8 Q16 34 22 60Z M20 60 Q26 36 34 16 Q38 40 44 60Z M42 60 Q50 30 56 2 Q62 34 66 60Z M64 60 Q72 36 80 12 Q82 40 88 60Z M86 60 Q92 32 100 6 L100 60Z'/%3E%3C/svg%3E")
+                    repeat-x left 0 bottom 190px / 100px 60px,
+                /* the ground itself */
+                linear-gradient(to bottom, var(--grass-front) 0%, var(--grass-ground) 100%)
+                    no-repeat left bottom / 100% 200px,
+                /* back blades (lighter, taller, peeking out behind) */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='84' viewBox='0 0 140 84'%3E%3Cpath fill='%236cbb3c' d='M0 84 Q6 44 14 10 Q22 46 30 84Z M28 84 Q36 50 48 22 Q54 54 62 84Z M60 84 Q70 40 80 4 Q88 46 96 84Z M94 84 Q104 50 114 18 Q120 52 126 84Z M124 84 Q130 46 140 12 L140 84Z'/%3E%3C/svg%3E")
+                    repeat-x left 35px bottom 190px / 140px 84px;
+        }
+
+        @media (max-width: 600px) {
+            .grass {
+                height: 220px;
+                background-size: 70px 42px, 100% 150px, 100px 60px;
+                background-position: left 0 bottom 140px, left bottom, left 25px bottom 140px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .paper,
+            .handle .arrow,
+            .location-btn {
+                transition: none;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="page">
-      <div class="sky-decor" aria-hidden="true">
-        <div class="cloud cloud-1"></div>
-        <div class="cloud cloud-2"></div>
-        <div class="cloud cloud-3"></div>
-        <div class="cloud cloud-4"></div>
-        <div class="cloud cloud-5"></div>
-        <div class="cloud cloud-6"></div>
-        <div class="cloud cloud-7"></div>
-        <div class="cloud cloud-8"></div>
-        <div class="cloud cloud-9"></div>
-        <div class="cloud cloud-10"></div>
-        <div class="cloud cloud-11"></div>
-        <div class="cloud cloud-12"></div>
+        <div class="sky-decor" aria-hidden="true">
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+            <div class="cloud cloud-4"></div>
+            <div class="cloud cloud-5"></div>
+            <div class="cloud cloud-6"></div>
+            <div class="cloud cloud-7"></div>
+            <div class="cloud cloud-8"></div>
+            <div class="cloud cloud-9"></div>
+            <div class="cloud cloud-10"></div>
+            <div class="cloud cloud-11"></div>
+            <div class="cloud cloud-12"></div>
 
-        <div class="star star-1"></div>
-        <div class="star star-2"></div>
-        <div class="star star-3"></div>
-        <div class="star star-4"></div>
-        <div class="star star-5"></div>
-        <div class="star star-6"></div>
-        <div class="star star-7"></div>
-        <div class="star star-8"></div>
-        <div class="star star-9"></div>
-        <div class="star star-10"></div>
-        <div class="star star-11"></div>
-        <div class="star star-12"></div>
-        <div class="star star-13"></div>
-        <div class="star star-14"></div>
-        <div class="star star-15"></div>
-        <div class="star star-16"></div>
-        <div class="star star-17"></div>
-        <div class="star star-18"></div>
-      </div>
+            <div class="star star-1"></div>
+            <div class="star star-2"></div>
+            <div class="star star-3"></div>
+            <div class="star star-4"></div>
+            <div class="star star-5"></div>
+            <div class="star star-6"></div>
+            <div class="star star-7"></div>
+            <div class="star star-8"></div>
+            <div class="star star-9"></div>
+            <div class="star star-10"></div>
+            <div class="star star-11"></div>
+            <div class="star star-12"></div>
+            <div class="star star-13"></div>
+            <div class="star star-14"></div>
+            <div class="star star-15"></div>
+            <div class="star star-16"></div>
+            <div class="star star-17"></div>
+            <div class="star star-18"></div>
+        </div>
 
-      <div class="content">
-        <h1 class="title">
-          <span class="title-line-1">Our Little Pony’s</span>
-          <span class="title-line-2">First Birthday Adventure!</span>
-        </h1>
+        <div class="content">
+            <h1 class="title">
+                <span class="title-line-1">Our Little Pony’s</span>
+                <span class="title-line-2">First Birthday Adventure!</span>
+            </h1>
 
-        <p class="intro">
-          Join us for a whimsical celebration as we honor the christening and
-          birthday of our little pony
-        </p>
+            <p class="intro">Join us for a whimsical celebration as we honor the christening and birthday of our little pony</p>
 
-        <img class="banner" src="image/banner.png" alt="Birthday banner" />
+            <img class="banner" src="image/banner.png" alt="Birthday banner">
 
-        <!-- The Godparents panel is loaded from godparents.html -->
-        <div id="godparents-container"></div>
+            <!-- The Godparents panel is loaded from godparents.html -->
+            <div id="godparents-container"></div>
 
-        <!-- The scroll/Event Details panel is loaded from event.html -->
-        <div id="event-container"></div>
+            <!-- The scroll/Event Details panel is loaded from event.html -->
+            <div id="event-container"></div>
 
-        <!-- The Dress Code panel is loaded from dress.html -->
-<div id="dress-container"></div>
-      </div>
+            <!-- The Dress Code panel is loaded from dress.html -->
+            <div id="dress-container"></div>
+        </div>
 
-      <div class="grass" aria-hidden="true"></div>
+        <div class="grass" aria-hidden="true"></div>
     </div>
 
     <script>
-      // ---------- Scroll drag-to-open behavior ----------
-      // Runs after event.html has been injected into #event-container.
-      function initScroll() {
-        var scroll = document.getElementById("scroll");
-        var paper = document.getElementById("paper");
-        var inner = document.getElementById("paperInner");
-        var handle = document.getElementById("handle");
+        // ---------- Scroll drag-to-open behavior ----------
+        // Runs after event.html has been injected into #event-container.
+        function initScroll() {
+            var scroll = document.getElementById("scroll");
+            var paper = document.getElementById("paper");
+            var inner = document.getElementById("paperInner");
+            var handle = document.getElementById("handle");
 
-        if (!scroll || !paper || !inner || !handle) return;
+            if (!scroll || !paper || !inner || !handle) return;
 
-        var maxHeight = 0; // how tall the parchment is when fully open
-        var current = 0; // current parchment height in px
-        var isOpen = false;
+            var maxHeight = 0;   // how tall the parchment is when fully open
+            var current = 0;     // current parchment height in px
+            var isOpen = false;
 
-        var dragging = false;
-        var moved = false;
-        var startY = 0;
-        var startHeight = 0;
-        var startedOpen = false;
+            var dragging = false;
+            var moved = false;
+            var startY = 0;
+            var startHeight = 0;
+            var startedOpen = false;
 
-        function clamp(value, min, max) {
-          return Math.min(Math.max(value, min), max);
+            function clamp(value, min, max) {
+                return Math.min(Math.max(value, min), max);
+            }
+
+            function setHeight(px) {
+                current = clamp(px, 0, maxHeight);
+                paper.style.height = current + "px";
+                var percent = maxHeight ? Math.round((current / maxHeight) * 100) : 0;
+                handle.setAttribute("aria-valuenow", percent);
+            }
+
+            function setOpen(open) {
+                isOpen = open;
+                scroll.classList.toggle("is-open", open);
+                setHeight(open ? maxHeight : 0);
+            }
+
+            function measure() {
+                maxHeight = inner.offsetHeight;
+                if (!dragging) {
+                    setHeight(isOpen ? maxHeight : 0);
+                }
+            }
+
+            handle.addEventListener("pointerdown", function (e) {
+                dragging = true;
+                moved = false;
+                startY = e.clientY;
+                startHeight = current;
+                startedOpen = isOpen;
+                paper.classList.add("dragging");
+                handle.setPointerCapture(e.pointerId);
+            });
+
+            handle.addEventListener("pointermove", function (e) {
+                if (!dragging) return;
+                var dy = e.clientY - startY;
+                if (Math.abs(dy) > 4) moved = true;
+                setHeight(startHeight + dy);
+            });
+
+            function endDrag() {
+                if (!dragging) return;
+                dragging = false;
+                paper.classList.remove("dragging");
+
+                if (!moved) {
+                    // A simple tap or click toggles the scroll
+                    setOpen(!isOpen);
+                } else if (startedOpen) {
+                    setOpen(current > maxHeight * 0.7);
+                } else {
+                    setOpen(current > maxHeight * 0.3);
+                }
+            }
+
+            handle.addEventListener("pointerup", endDrag);
+            handle.addEventListener("pointercancel", endDrag);
+
+            // Keyboard support: Arrow Down opens, Arrow Up closes, Enter/Space toggles
+            handle.addEventListener("keydown", function (e) {
+                if (e.key === "ArrowDown") { e.preventDefault(); setOpen(true); }
+                if (e.key === "ArrowUp")   { e.preventDefault(); setOpen(false); }
+                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpen(!isOpen); }
+            });
+
+            // Re-measure when the content size changes (fonts loading, window resizing)
+            if (window.ResizeObserver) {
+                new ResizeObserver(measure).observe(inner);
+            }
+            window.addEventListener("resize", measure);
+            measure();
         }
 
-        function setHeight(px) {
-          current = clamp(px, 0, maxHeight);
-          paper.style.height = current + "px";
-          var percent = maxHeight ? Math.round((current / maxHeight) * 100) : 0;
-          handle.setAttribute("aria-valuenow", percent);
+        // ---------- Countdown to November 28, 2026 ----------
+        // Runs after event.html has been injected into #event-container.
+        function initCountdown() {
+            var target = new Date("2026-11-28T00:00:00");
+            var daysEl = document.getElementById("cd-days");
+            var hoursEl = document.getElementById("cd-hours");
+            var minutesEl = document.getElementById("cd-minutes");
+
+            if (!daysEl || !hoursEl || !minutesEl) return;
+
+            function pad(n) {
+                return String(n).padStart(2, "0");
+            }
+
+            function update() {
+                var diff = target.getTime() - Date.now();
+
+                if (diff <= 0) {
+                    daysEl.textContent = "00";
+                    hoursEl.textContent = "00";
+                    minutesEl.textContent = "00";
+                    return;
+                }
+
+                var totalMinutes = Math.floor(diff / 60000);
+                var days = Math.floor(totalMinutes / (60 * 24));
+                var hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+                var minutes = totalMinutes % 60;
+
+                daysEl.textContent = pad(days);
+                hoursEl.textContent = pad(hours);
+                minutesEl.textContent = pad(minutes);
+            }
+
+            update();
+            setInterval(update, 1000 * 30); // refresh twice a minute, plenty for a minutes-level countdown
         }
 
-        function setOpen(open) {
-          isOpen = open;
-          scroll.classList.toggle("is-open", open);
-          setHeight(open ? maxHeight : 0);
+        // ---------- Dress code slider ----------
+        // Runs after dress.html has been injected into #dress-container.
+        function initDressSlider() {
+            var track = document.getElementById("dressTrack");
+            var prevBtn = document.getElementById("dressPrev");
+            var nextBtn = document.getElementById("dressNext");
+            var dots = document.querySelectorAll(".dress-dot");
+
+            if (!track || !prevBtn || !nextBtn) return;
+
+            var index = 0;
+            var total = track.children.length;
+
+            function update() {
+                track.style.transform = "translateX(" + (-index * 100) + "%)";
+                dots.forEach(function (dot, i) {
+                    dot.classList.toggle("is-active", i === index);
+                });
+            }
+
+            prevBtn.addEventListener("click", function () {
+                index = (index - 1 + total) % total;
+                update();
+            });
+
+            nextBtn.addEventListener("click", function () {
+                index = (index + 1) % total;
+                update();
+            });
+
+            dots.forEach(function (dot) {
+                dot.addEventListener("click", function () {
+                    index = parseInt(dot.dataset.index, 10);
+                    update();
+                });
+            });
+
+            // Basic swipe support for touch devices
+            var startX = null;
+            track.addEventListener("touchstart", function (e) {
+                startX = e.touches[0].clientX;
+            }, { passive: true });
+
+            track.addEventListener("touchend", function (e) {
+                if (startX === null) return;
+                var diff = e.changedTouches[0].clientX - startX;
+                if (diff > 40) {
+                    index = (index - 1 + total) % total;
+                    update();
+                } else if (diff < -40) {
+                    index = (index + 1) % total;
+                    update();
+                }
+                startX = null;
+            });
+
+            update();
         }
 
-        function measure() {
-          maxHeight = inner.offsetHeight;
-          if (!dragging) {
-            setHeight(isOpen ? maxHeight : 0);
-          }
-        }
+        // ---------- Load the two panels from their own files ----------
+        fetch("event.html")
+            .then(function (res) { return res.text(); })
+            .then(function (html) {
+                document.getElementById("event-container").innerHTML = html;
+                initScroll();
+                initCountdown();
+            })
+            .catch(function (err) {
+                console.error("Could not load event.html:", err);
+            });
 
-        handle.addEventListener("pointerdown", function (e) {
-          dragging = true;
-          moved = false;
-          startY = e.clientY;
-          startHeight = current;
-          startedOpen = isOpen;
-          paper.classList.add("dragging");
-          handle.setPointerCapture(e.pointerId);
-        });
-
-        handle.addEventListener("pointermove", function (e) {
-          if (!dragging) return;
-          var dy = e.clientY - startY;
-          if (Math.abs(dy) > 4) moved = true;
-          setHeight(startHeight + dy);
-        });
-
-        function endDrag() {
-          if (!dragging) return;
-          dragging = false;
-          paper.classList.remove("dragging");
-
-          if (!moved) {
-            // A simple tap or click toggles the scroll
-            setOpen(!isOpen);
-          } else if (startedOpen) {
-            setOpen(current > maxHeight * 0.7);
-          } else {
-            setOpen(current > maxHeight * 0.3);
-          }
-        }
-
-        handle.addEventListener("pointerup", endDrag);
-        handle.addEventListener("pointercancel", endDrag);
-
-        // Keyboard support: Arrow Down opens, Arrow Up closes, Enter/Space toggles
-        handle.addEventListener("keydown", function (e) {
-          if (e.key === "ArrowDown") {
-            e.preventDefault();
-            setOpen(true);
-          }
-          if (e.key === "ArrowUp") {
-            e.preventDefault();
-            setOpen(false);
-          }
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setOpen(!isOpen);
-          }
-        });
-
-        // Re-measure when the content size changes (fonts loading, window resizing)
-        if (window.ResizeObserver) {
-          new ResizeObserver(measure).observe(inner);
-        }
-        window.addEventListener("resize", measure);
-        measure();
-      }
-
-      // ---------- Countdown to November 28, 2026 ----------
-      // Runs after event.html has been injected into #event-container.
-      function initCountdown() {
-        var target = new Date("2026-11-28T00:00:00");
-        var daysEl = document.getElementById("cd-days");
-        var hoursEl = document.getElementById("cd-hours");
-        var minutesEl = document.getElementById("cd-minutes");
-
-        if (!daysEl || !hoursEl || !minutesEl) return;
-
-        function pad(n) {
-          return String(n).padStart(2, "0");
-        }
-
-        function update() {
-          var diff = target.getTime() - Date.now();
-
-          if (diff <= 0) {
-            daysEl.textContent = "00";
-            hoursEl.textContent = "00";
-            minutesEl.textContent = "00";
-            return;
-          }
-
-          var totalMinutes = Math.floor(diff / 60000);
-          var days = Math.floor(totalMinutes / (60 * 24));
-          var hours = Math.floor((totalMinutes % (60 * 24)) / 60);
-          var minutes = totalMinutes % 60;
-
-          daysEl.textContent = pad(days);
-          hoursEl.textContent = pad(hours);
-          minutesEl.textContent = pad(minutes);
-        }
-
-        update();
-        setInterval(update, 1000 * 30); // refresh twice a minute, plenty for a minutes-level countdown
-      }
-
-      // ---------- Load the two panels from their own files ----------
-      fetch("event.html")
-        .then(function (res) {
-          return res.text();
-        })
-        .then(function (html) {
-          document.getElementById("event-container").innerHTML = html;
-          initScroll();
-          initCountdown();
-        })
-        .catch(function (err) {
-          console.error("Could not load event.html:", err);
-        });
-
-      fetch("godparents.html")
-        .then(function (res) {
-          return res.text();
-        })
-        .then(function (html) {
-          document.getElementById("godparents-container").innerHTML = html;
-        })
-        .catch(function (err) {
-          console.error("Could not load godparents.html:", err);
-        });
+        fetch("godparents.html")
+            .then(function (res) { return res.text(); })
+            .then(function (html) {
+                document.getElementById("godparents-container").innerHTML = html;
+            })
+            .catch(function (err) {
+                console.error("Could not load godparents.html:", err);
+            });
 
         fetch("dress.html")
-    .then(function (res) { return res.text(); })
-    .then(function (html) {
-        document.getElementById("dress-container").innerHTML = html;
-    })
-    .catch(function (err) {
-        console.error("Could not load dress.html:", err);
-    });
+            .then(function (res) { return res.text(); })
+            .then(function (html) {
+                document.getElementById("dress-container").innerHTML = html;
+                initDressSlider();
+            })
+            .catch(function (err) {
+                console.error("Could not load dress.html:", err);
+            });
     </script>
-  </body>
+</body>
 </html>
