@@ -11,6 +11,7 @@
   var pukeWave = document.getElementById("pukeWave");
 
   var tapped = false;
+  var ponySrc = ponyImg.getAttribute("src");
 
   // ---------- Background: clouds and sparkles ----------
 
@@ -141,6 +142,22 @@
       window.location.href = NEXT_PAGE;
     }, NAVIGATE_DELAY);
   }
+
+  // Going Back to this page restores it exactly as it was left (wave and splats
+  // still on screen), so put everything back to the starting state.
+  function resetPage() {
+    tapped = false;
+    ponyImg.src = ponySrc;
+    pony.classList.remove("active");
+    pukeWave.classList.remove("active");
+    document.querySelectorAll(".screen-splat").forEach(function (splat) {
+      splat.remove();
+    });
+  }
+
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted) resetPage();
+  });
 
   document.body.addEventListener("click", handleScreenTap);
 })();

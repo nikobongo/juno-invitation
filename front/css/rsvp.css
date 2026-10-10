@@ -11,7 +11,7 @@
   margin: 0 0 -20px;
   text-align: center;
   font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-size: clamp(1.2rem, 3vw, 2rem);
   font-weight: normal;
   line-height: 1.1;
   color: #ffffff;
