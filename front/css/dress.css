@@ -6,7 +6,7 @@
 }
 
 .dress-code-title {
-  margin: 0 0 28px;
+  margin: 0 0 10px;
   text-align: center;
   font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
   font-size: clamp(1.3rem, 6vw, 2rem);
@@ -22,6 +22,27 @@
     0 -2px 0 var(--outline-color),
     2px 0 0 var(--outline-color),
     -2px 0 0 var(--outline-color);
+}
+
+/* Subtitle and note: Equestria Bold, white with the purple outline */
+.dress-code-subtitle {
+  font-family: "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(0.9rem, 3vw, 1.3rem);
+  line-height: 1.3;
+  color: #ffffff;
+  text-shadow:
+    -2px -2px 0 var(--outline-color),
+    2px -2px 0 var(--outline-color),
+    -2px 2px 0 var(--outline-color),
+    2px 2px 0 var(--outline-color),
+    0 2px 0 var(--outline-color),
+    0 -2px 0 var(--outline-color),
+    2px 0 0 var(--outline-color),
+    -2px 0 0 var(--outline-color);
+}
+
+.dress-code-subtitle {
+  margin: 0 0 0;
 }
 
 /* Slider: one palette image at a time, wood-rod arrows and purple dots to match the page */

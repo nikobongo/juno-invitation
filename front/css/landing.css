@@ -1,0 +1,244 @@
+/* ---------- Landing page: tap the pony to see the invitation ---------- */
+/* Fonts come from base.css ("Pony MLP") */
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  cursor: pointer;
+  font-family: sans-serif;
+  background: #87ceeb url("../../media/image/landing/landingbg.jpeg") center / cover no-repeat;
+}
+
+/* ---------- Text: white with a purple outline, like the section titles ---------- */
+h1,
+.rainbow-text {
+  position: relative;
+  z-index: 2;
+  font-family: "Pony MLP", sans-serif;
+  text-align: center;
+  color: #ffffff;
+  text-shadow:
+    -2px -2px 0 var(--outline-color),
+    2px -2px 0 var(--outline-color),
+    -2px 2px 0 var(--outline-color),
+    2px 2px 0 var(--outline-color),
+    0 2px 0 var(--outline-color),
+    0 -2px 0 var(--outline-color),
+    2px 0 0 var(--outline-color),
+    -2px 0 0 var(--outline-color);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 7vw, 3rem);
+}
+
+h1.title {
+  margin-top: 60px;
+}
+
+h1.subtitle {
+  margin-top: 10px;
+}
+
+h1.prompt {
+  margin-top: 10px;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
+}
+
+/* JUNO'S: the word itself draws the purple outline (purple text + outline shadow),
+   and a copy on top (::after) fills it with the moving rainbow. */
+.rainbow-text {
+  margin-top: 20px;
+  font-size: clamp(3rem, 16vw, 5rem);
+  font-weight: bold;
+  color: var(--outline-color);
+}
+
+.rainbow-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  white-space: nowrap;
+  text-shadow: none;
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ff9900,
+    #ffee00,
+    #33ff00,
+    #00ffee,
+    #0066ff,
+    #cc00ff,
+    #ff0000
+  );
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow-move 10s linear infinite;
+}
+
+@keyframes rainbow-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 400% 50%;
+  }
+}
+
+/* ---------- Pony ---------- */
+.pony-wrap {
+  position: relative;
+  z-index: 2;
+  width: min(280px, 60vw);
+  height: min(280px, 60vw);
+  margin-top: 15px;
+}
+
+.pony-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pony-wrap.active img {
+  animation: pony-squish 0.6s ease-out;
+}
+
+@keyframes pony-squish {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.05, 0.9);
+  }
+  60% {
+    transform: scale(0.95, 1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ---------- Splats scattered around the screen ---------- */
+.screen-splat {
+  position: fixed;
+  z-index: 999;
+  opacity: 0;
+  transform: scale(0) rotate(0deg);
+  pointer-events: none;
+}
+
+.screen-splat.pop {
+  animation: splat-pop 0.9s ease-out forwards;
+}
+
+@keyframes splat-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(var(--rot, 0deg));
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15) rotate(var(--rot, 0deg));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(var(--rot, 0deg));
+  }
+}
+
+/* ---------- Full-screen rainbow wave transition ---------- */
+.puke-wave {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    #ff0000,
+    #ff9900,
+    #ffee00,
+    #33ff00,
+    #00ffee,
+    #0066ff,
+    #cc00ff
+  );
+  clip-path: circle(0% at var(--ox, 50%) var(--oy, 50%));
+}
+
+.puke-wave.active {
+  animation: puke-wave-grow 1.4s ease-in forwards;
+}
+
+@keyframes puke-wave-grow {
+  0% {
+    opacity: 1;
+    clip-path: circle(0% at var(--ox, 50%) var(--oy, 50%));
+  }
+  100% {
+    opacity: 1;
+    clip-path: circle(150% at var(--ox, 50%) var(--oy, 50%));
+  }
+}
+
+/* ---------- Background decorations ---------- */
+.bg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  opacity: 0.85;
+  animation: drift linear infinite;
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 200px));
+  }
+}
+
+.sparkle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}

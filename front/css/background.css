@@ -487,7 +487,7 @@
 /* tree1 is the main tree, centered */
 .tree-1 {
   width: 50%;
-  left: 60%;
+  left: 55%;
   bottom: 35%;
   transform: translateX(-50%);
   cursor: pointer;
