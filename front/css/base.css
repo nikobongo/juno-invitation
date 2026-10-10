@@ -16,6 +16,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Equestria Bold Original";
+  src: url("../../media/font/Equestria Bold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---------- Theme ---------- */
 :root {
   --text-color: #ffffff;

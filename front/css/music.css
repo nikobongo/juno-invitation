@@ -1,0 +1,55 @@
+/* ---------- Music: mute / unmute button, fixed at the top right ---------- */
+.music-btn {
+  position: fixed;
+  top: calc(12px + env(safe-area-inset-top, 0px));
+  right: calc(12px + env(safe-area-inset-right, 0px));
+  z-index: 100;
+  width: clamp(40px, 10vw, 56px);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.music-btn:hover {
+  transform: scale(1.08);
+}
+
+.music-btn:active {
+  transform: scale(0.95);
+}
+
+.music-btn:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+
+.music-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Show the "sound on" icon while music is playing, otherwise the "muted" one */
+.music-icon--on {
+  display: none;
+}
+
+.music-btn.is-on .music-icon--on {
+  display: block;
+}
+
+.music-btn.is-on .music-icon--off {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-btn {
+    transition: none;
+  }
+}

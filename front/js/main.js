@@ -8,6 +8,8 @@ import { initFlyingRainbowDash, initTreeShake } from "./background.js";
 import { initGiftBook } from "./gift.js";
 import { initCountdown } from "./event.js";
 import { initDressSlider } from "./dress.js";
+import { initMusic } from "./music.js";
+import { initRsvp } from "./rsvp.js";
 
 const sections = [
   {
@@ -34,6 +36,8 @@ const sections = [
   },
   { files: ["frame.html"], mount: "frame-container" },
   { files: ["gift.html"], mount: "gift-container", init: initGiftBook },
+  { files: ["rsvp.html"], mount: "rsvp-container", init: initRsvp },
+  { files: ["music.html"], mount: "music-container", init: initMusic },
 ];
 
 async function fetchHtml(file) {
