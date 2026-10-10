@@ -486,9 +486,9 @@
 
 /* tree1 is the main tree, centered */
 .tree-1 {
-  width: 36%;
-  left: 50%;
-  bottom: 32%;
+  width: 50%;
+  left: 60%;
+  bottom: 35%;
   transform: translateX(-50%);
   cursor: pointer;
   pointer-events: auto;
@@ -497,10 +497,10 @@
 /* Applejack stands right beside the main tree (tree1 spans 32% to 68% of the width) */
 .applejack {
   position: absolute;
-  width: 14%;
+  width: 20%;
   height: auto;
-  left: 28%;
-  bottom: 21%;
+  left: 36%;
+  bottom: 20%;
   z-index: 1;
   pointer-events: none;
 }
@@ -538,8 +538,8 @@
 /* the rest flank it, scattered wider and bigger */
 .tree-2 {
   width: 24%;
-  left: 14%;
-  bottom: 50%;
+  left: 10%;
+  bottom: 60%;
 }
 
 .tree-3 {
