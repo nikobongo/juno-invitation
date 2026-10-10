@@ -1,0 +1,38 @@
+/* ---------- Banner ---------- */
+.banner {
+  display: block;
+  width: min(90%, 720px);
+  height: auto;
+  margin: 0 auto;
+  animation: bannerFloat 3s ease-in-out infinite;
+}
+
+@keyframes bannerFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+
+.banner-curve-wrap {
+  width: min(90%, 720px);
+  margin: 0 auto -20px;
+}
+
+.banner-curve-text {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.banner-curve-text-path {
+  font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: 28px;
+  fill: #ffffff;
+  stroke: var(--outline-color);
+  stroke-width: 4px;
+  paint-order: stroke fill;
+}

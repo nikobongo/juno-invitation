@@ -1,0 +1,348 @@
+/* Small purple outline, applied to every piece of text in the event section */
+.details-title,
+.event-date,
+.event-day,
+.christening-title,
+.christening-time,
+.christening-venue,
+.location-btn,
+.countdown-label,
+.countdown-value,
+.countdown-unit-label {
+  text-shadow:
+    -2px -2px 0 var(--outline-color),
+    2px -2px 0 var(--outline-color),
+    -2px 2px 0 var(--outline-color),
+    2px 2px 0 var(--outline-color),
+    0 2px 0 var(--outline-color),
+    0 -2px 0 var(--outline-color),
+    2px 0 0 var(--outline-color),
+    -2px 0 0 var(--outline-color);
+}
+
+/* ---------- The scroll (static, opened) ---------- */
+.scroll {
+  position: relative;
+  width: min(88%, 560px);
+  margin: 48px auto 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Top and bottom wooden rods */
+.rod {
+  position: relative;
+  height: 30px;
+  border-radius: 15px;
+  background: linear-gradient(
+    to bottom,
+    var(--rod-light),
+    #7a4a24 50%,
+    var(--rod-dark)
+    );
+  box-shadow: 0 4px 8px rgba(40, 20, 0, 0.3);
+}
+
+/* Golden end caps */
+.rod::before,
+.rod::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  width: 16px;
+  height: 40px;
+  border-radius: 8px;
+  background: linear-gradient(
+    to bottom,
+    #f3d27a,
+    var(--rod-cap) 50%,
+    #a87d24
+    );
+}
+
+.rod::before {
+  left: -8px;
+}
+
+.rod::after {
+  right: -8px;
+}
+
+/* Static opened parchment */
+.paper {
+  height: auto;
+  margin: 0 14px;
+  overflow: visible;
+  background:
+    linear-gradient(
+    to right,
+    rgba(120, 80, 30, 0.28),
+    transparent 7%,
+    transparent 93%,
+    rgba(120, 80, 30, 0.28)
+    ),
+    var(--parchment);
+}
+
+.paper-inner {
+  padding: 36px 24px 44px;
+  text-align: center;
+}
+
+/* "Event Details" heading inside the scroll */
+.details-title {
+  margin: 0;
+  font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: normal;
+  line-height: 1.1;
+  color: var(--text-color);
+}
+
+/* Date inside the scroll */
+.event-date {
+  margin: 24px 0 0;
+  font-family:
+    "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: normal;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+/* Make the "28" bigger than the rest of the date */
+.event-date .day {
+  font-size: 1.65em;
+  line-height: 1;
+}
+
+/* Day of the week under the date */
+.event-day {
+  margin: 8px 0 0;
+  font-family:
+    "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1.25rem, 4vw, 2.5rem);
+  font-weight: normal;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+/* Holds the Christening and Party rows */
+.events {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 40px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 48px auto 0; /* the space under "Saturday" */
+}
+
+/* Each row: image and text side by side */
+.christening,
+.party {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.christening-icon {
+  flex: 0 0 auto;
+  width: clamp(56px, 11vw, 88px);
+  height: auto;
+}
+
+.christening-text {
+  text-align: center;
+}
+
+/* "Christening" / "Party" and their time sit side by side with a space between */
+.christening-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  column-gap: 32px;
+}
+
+.christening-title,
+.christening-time {
+  margin: 0;
+  font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1rem, 3.6vw, 2rem);
+  font-weight: normal;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+/* Venue under the title and time (used by both rows) */
+.christening-venue {
+  margin: 8px 0 0;
+  font-family:
+    "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1.25rem, 3vw, 1.2rem);
+  font-weight: normal;
+  line-height: 1.25;
+  color: var(--text-color);
+}
+
+/* "View Location" button, styled like the scroll rods (wood with golden caps) */
+.location-btn {
+  position: relative;
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 30px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to bottom,
+    var(--rod-light),
+    #7a4a24 50%,
+    var(--rod-dark)
+    );
+  box-shadow: 0 4px 8px rgba(40, 20, 0, 0.3);
+  font-family:
+    "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1rem, 2.4vw, 1.3rem);
+  line-height: 1.2;
+  color: var(--text-color);
+  text-decoration: none;
+  transition:
+    filter 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Golden end caps, same as the scroll rods */
+.location-btn::before,
+.location-btn::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  width: 14px;
+  border-radius: 7px;
+  background: linear-gradient(
+    to bottom,
+    #f3d27a,
+    var(--rod-cap) 50%,
+    #a87d24
+    );
+}
+
+.location-btn::before {
+  left: -7px;
+}
+.location-btn::after {
+  right: -7px;
+}
+
+.location-btn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+.location-btn:active {
+  transform: translateY(1px);
+}
+
+.location-btn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px #ffffff,
+    0 0 0 6px var(--text-color);
+}
+
+/* ---------- Countdown, at the bottom of the scroll ---------- */
+.countdown {
+  margin: 48px 0 0;
+  padding-top: 28px;
+  border-top: 2px dashed var(--rod-light);
+}
+
+.countdown-label {
+  margin: 0 0 16px;
+  font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1.3rem, 3.6vw, 2rem);
+  font-weight: normal;
+  line-height: 1.1;
+  color: var(--text-color);
+}
+
+.countdown-units {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* Each unit is a small wooden plaque, matching the scroll's rod colors */
+.countdown-unit {
+  position: relative;
+  min-width: 78px;
+  padding: 12px 10px;
+  border-radius: 12px;
+  background: linear-gradient(
+    to bottom,
+    var(--rod-light),
+    #7a4a24 50%,
+    var(--rod-dark)
+    );
+  box-shadow: 0 4px 8px rgba(40, 20, 0, 0.3);
+}
+
+.countdown-unit::before,
+.countdown-unit::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 26px;
+  border-radius: 5px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    to bottom,
+    #f3d27a,
+    var(--rod-cap) 50%,
+    #a87d24
+    );
+}
+
+.countdown-unit::before {
+  left: -5px;
+}
+.countdown-unit::after {
+  right: -5px;
+}
+
+.countdown-value {
+  display: block;
+  font-family:
+    "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1.5rem, 4.2vw, 2.2rem);
+  line-height: 1.1;
+  color: var(--text-color);
+}
+
+.countdown-unit-label {
+  display: block;
+  margin-top: 4px;
+  font-family:
+    "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(0.75rem, 2vw, 0.95rem);
+  color: var(--text-color);
+}
+
+@media (max-width: 420px) {
+  .countdown-units {
+    gap: 8px;
+  }
+
+  .countdown-unit {
+    min-width: 64px;
+    padding: 10px 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .location-btn {
+    transition: none;
+  }
+}

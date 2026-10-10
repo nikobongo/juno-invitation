@@ -1,0 +1,57 @@
+/* ---------- Fonts ---------- */
+@font-face {
+  font-family: "Pony MLP";
+  src: url("../../media/font/PONY - MLP 2 - Version Definitiva 6 - Kustren.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Equestria Bold";
+  src: url("../../media/font/fredoka-one.one-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Theme ---------- */
+:root {
+  --text-color: #ffffff;
+  --outline-color: #652c89;
+
+  --sky-top: #2a78d0;
+  --sky-mid: #6fb6ee;
+  --sky-bottom: #d6f0fb;
+
+  --parchment: #f4e4bc;
+  --rod-light: #b57a45;
+  --rod-dark: #5a3416;
+  --rod-cap: #e0b34a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--sky-bottom);
+}
+
+/* Wrappers that sections are loaded into; they must not affect layout */
+.mount {
+  display: contents;
+}
+
+/* Page content sits above the background decorations */
+.content {
+  position: relative;
+  z-index: 2;
+}

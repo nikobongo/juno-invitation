@@ -1,0 +1,42 @@
+/* ---------- Rainbow and hot air balloon ---------- */
+.introimg-container {
+  position: relative;
+  width: min(90%, 720px);
+  margin: 0 auto;
+}
+
+.rainbow {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hotairballoon {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  left: 55%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+
+  animation: balloonFly 3s ease-in-out infinite;
+}
+
+@keyframes balloonFly {
+  0%, 100% {
+    transform: translate(-50%, -50%) translate(0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate(-50%, -50%) translate(8px, -5px) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translate(12px, 0) rotate(0deg);
+  }
+
+  75% {
+    transform: translate(-50%, -50%) translate(5px, 5px) rotate(-1deg);
+  }
+}

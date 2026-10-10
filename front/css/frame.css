@@ -1,0 +1,9 @@
+/* ---------- Frame ---------- */
+.frame {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: min(90%, 720px);
+  height: auto;
+  margin: 25px auto;
+}

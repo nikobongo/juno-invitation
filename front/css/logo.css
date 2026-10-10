@@ -1,0 +1,42 @@
+/* ---------- Logo and Twilight Sparkle ---------- */
+.title {
+  margin: 0;
+  padding: 48px 24px 0;
+  text-align: center;
+}
+
+.logo-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  display: block;
+  width: min(90%, 500px);
+  height: auto;
+  margin: 0;
+  margin-left: -80px;
+}
+
+.twilight {
+  display: block;
+  width: min(40%, 200px);
+  height: auto;
+  object-fit: contain;
+  margin-left: -120px;
+  position: relative;
+  z-index: 2;
+
+  animation: floatTwilight 2s ease-in-out infinite;
+}
+
+@keyframes floatTwilight {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-40px);
+  }
+}

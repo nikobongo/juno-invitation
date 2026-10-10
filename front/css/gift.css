@@ -1,0 +1,58 @@
+/* ---------- Gift book: automatically flips through gift pages ---------- */
+.gift-book {
+  position: relative;
+  z-index: 2;
+  overflow: visible;
+  width: min(90%, 480px);
+  margin: 0 auto 64px;
+  text-align: center;
+}
+
+.gift-book-title {
+  position: relative;
+  z-index: 2;
+  margin: 40px 0 0;
+  text-align: center;
+  font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1.3rem, 6vw, 2rem);
+  font-weight: normal;
+  line-height: 1.1;
+  color: #ffffff;
+  text-shadow:
+    -2px -2px 0 var(--outline-color),
+    2px -2px 0 var(--outline-color),
+    -2px 2px 0 var(--outline-color),
+    2px 2px 0 var(--outline-color),
+    0 2px 0 var(--outline-color),
+    0 -2px 0 var(--outline-color),
+    2px 0 0 var(--outline-color),
+    -2px 0 0 var(--outline-color);
+}
+
+.gift-book-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 250px;
+}
+
+.fluttershy {
+  position: absolute;
+  width: clamp(100px, 25vw, 180px);
+  height: auto;
+  bottom: 0;
+  left: 10%;
+  transform: translate(-50%, 20%);
+  z-index: 3;
+  pointer-events: none;
+  animation: fluttershyFloat 3s ease-in-out infinite;
+}
+
+@keyframes fluttershyFloat {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(50px);
+  }
+}

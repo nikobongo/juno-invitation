@@ -1,0 +1,203 @@
+/* ---------- Godparents: no panel, each name floats in its own little cloud ---------- */
+.godparents {
+  width: min(92%, 680px);
+  margin: 64px auto 0;
+  text-align: center;
+}
+
+.godparents-title {
+  margin: 0 0 28px;
+  text-align: center;
+  font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2rem);
+  font-weight: normal;
+  line-height: 1.1;
+  color: #ffffff;
+  text-shadow:
+    -2px -2px 0 var(--outline-color),
+    2px -2px 0 var(--outline-color),
+    -2px 2px 0 var(--outline-color),
+    2px 2px 0 var(--outline-color),
+    0 2px 0 var(--outline-color),
+    0 -2px 0 var(--outline-color),
+    2px 0 0 var(--outline-color),
+    -2px 0 0 var(--outline-color);
+}
+
+.godparents-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px 48px;
+}
+
+.godparents-column {
+  flex: 1 1 200px;
+  max-width: 260px;
+  text-align: center;
+}
+
+/* The Godfather column holds two sub-lists side by side, so it needs more room */
+.godparents-column--wide {
+  flex-basis: 320px;
+  max-width: 360px;
+}
+
+.godparents-column-title {
+  margin: 0 0 18px;
+  font-family: "Pony MLP", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1.2rem, 3.2vw, 1.6rem);
+  font-weight: normal;
+  line-height: 1.1;
+  color: #ffffff;
+  text-shadow:
+    -2px -2px 0 var(--outline-color),
+    2px -2px 0 var(--outline-color),
+    -2px 2px 0 var(--outline-color),
+    2px 2px 0 var(--outline-color),
+    0 2px 0 var(--outline-color),
+    0 -2px 0 var(--outline-color),
+    2px 0 0 var(--outline-color),
+    -2px 0 0 var(--outline-color);
+}
+
+/* Splits a long name list (like Godfather) into two side-by-side sub-lists */
+.godparents-subcolumns {
+  display: flex;
+  justify-content: center;
+  gap: 10px 20px;
+}
+
+.godparents-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each name sits in its own small cloud chip that drifts slightly, as if afloat in the sky */
+.godparents-list li {
+  position: relative;
+  display: inline-block;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 9px 20px;
+  font-family:
+    "Equestria Bold", "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(0.85rem, 2.1vw, 1rem);
+  line-height: 1.3;
+  white-space: nowrap;
+  color: #652c89;
+  box-shadow: 0 4px 10px rgba(40, 20, 0, 0.18);
+  animation: drift-name var(--name-dur, 6s) ease-in-out infinite;
+  animation-delay: var(--name-delay, 0s);
+}
+
+/* Little puffs on top of each name-cloud, like the bigger sky clouds */
+.godparents-list li::before,
+.godparents-list li::after {
+  content: "";
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.godparents-list li::before {
+  width: 16px;
+  height: 16px;
+  top: -8px;
+  left: 14px;
+  box-shadow:
+    15px -3px 0 -1px #ffffff,
+    28px 1px 0 -4px #ffffff;
+}
+
+.godparents-list li::after {
+  width: 12px;
+  height: 12px;
+  top: -5px;
+  right: 18px;
+  box-shadow: -14px -2px 0 -2px #ffffff;
+}
+
+/* A handful of duration/delay variants, cycled across the names, so the
+ floating motion looks independent and not perfectly synced. */
+.godparents-list li:nth-child(6n + 1) {
+  --name-dur: 5.2s;
+  --name-delay: 0s;
+}
+.godparents-list li:nth-child(6n + 2) {
+  --name-dur: 6.4s;
+  --name-delay: 0.6s;
+}
+.godparents-list li:nth-child(6n + 3) {
+  --name-dur: 4.8s;
+  --name-delay: 1.1s;
+}
+.godparents-list li:nth-child(6n + 4) {
+  --name-dur: 7.1s;
+  --name-delay: 0.3s;
+}
+.godparents-list li:nth-child(6n + 5) {
+  --name-dur: 5.6s;
+  --name-delay: 1.4s;
+}
+.godparents-list li:nth-child(6n + 6) {
+  --name-dur: 6.9s;
+  --name-delay: 0.8s;
+}
+
+@keyframes drift-name {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(3px, -4px) rotate(0.6deg);
+  }
+  50% {
+    transform: translate(-3px, 2px) rotate(-0.5deg);
+  }
+  75% {
+    transform: translate(2px, 4px) rotate(0.4deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+/* ---------- Pinkie Pie ---------- */
+.pinkie {
+  display: block;
+  width: min(25%, 300px);
+  height: auto;
+  margin: 0 auto;
+  animation: pinkieFloat 3s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .pinkie {
+    width: 200px;
+    max-width: 70vw;
+    height: auto;
+    position: relative;
+    left: -100px;
+  }
+}
+
+@keyframes pinkieFloat {
+  0%, 100% {
+    transform: translateX(80%) translateY(0);
+  }
+  50% {
+    transform: translateX(80%) translateY(-16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .godparents-list li {
+    animation: none;
+  }
+}
