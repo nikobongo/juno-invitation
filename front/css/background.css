@@ -494,6 +494,17 @@
   pointer-events: auto;
 }
 
+/* Applejack stands right beside the main tree (tree1 spans 32% to 68% of the width) */
+.applejack {
+  position: absolute;
+  width: 14%;
+  height: auto;
+  left: 28%;
+  bottom: 21%;
+  z-index: 1;
+  pointer-events: none;
+}
+
 .tree-1.is-shaking {
   animation: tree-shake 0.6s ease-in-out;
 }
